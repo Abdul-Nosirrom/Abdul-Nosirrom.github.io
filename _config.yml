@@ -1,121 +1,72 @@
-#
-# This file contains configuration flags to customize your site
-#
+# Site settings
+title: Abdulrahmen Almodaimegh      # This is your site's title, used in the browser tab and header
+email: abdul.almod@gmail.com         # Your contact email
+description: >-                      # The >- symbol allows for multiline text
+  A portfolio and blog about mathematics, computer graphics,
+  and programming insights.          # This description appears in search results and metadata
 
-# Site locale
-lang: "en"
+baseurl: ""                         # Used when your site lives in a subdirectory. Empty for username.github.io sites
+url: "https://abdul-nosirrom.github.io"  # Your site's full URL
 
-# Name of your site (displayed in the header)
-title: Abdulrahmen Almodaimegh
-
-# Short bio or description (displayed in the header)
-description: My custom cool page with all my cool stuff asdfasfasf
-
-# URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: /assets/image/avatar.png
-
-#
-# Flags below are optional
-#
-
-# Your website URL (e.g. https://forever-jekyll.github.io or https://forever-jekyll.com)
-# Used for Sitemap.xml and your RSS feed
-url: https://abdul-nosirrom.github.io
-
-# If you're hosting your site at a Project repository on GitHub pages
-# (http://yourusername.github.io/repository-name)
-# and NOT your User repository (http://yourusername.github.io)
-# then add in the baseurl here, like this: "/repository-name"
-baseurl: "/abdul-nosirrom.github.io"
-
-# Navigation menu
-navigation_links:
-  - title: Blog
-    url: /
-
-  - title: About
-    url: /about
-
-  - title: Publications
-    url: /publications  
-
-  - title: Search
-    url: /search
-
-# Footer icons
-footer_links:
-#  - title: Feed
-#    url: feed.xml
-#    icon: fa fa-rss-square
-
-#  - title: Twitter
-#    url: https://twitter.com/jekyllrb
-#    icon: fa fa-twitter-square
-
-  - title: LinkdIn
-    url: https://www.linkedin.com/in/abdulrahmen-al-modaimegh-758bbb22b/
-    icon: fa fa-linkedin-square
-
-  - title: GitHub
-    url: https://github.com/abdul-nosirrom
-    icon: fa fa-github-square
-
-# Enter your copyright text if you wish to override the default one.
-#copyright: "This site is made with <3 by *me, myself, and I*."
-
-# Time zone
-timezone: null
-
-# Excerpt separator
-excerpt_separator: <!--more-->
-
-#
-# !! You don't need to change any of the configuration flags below !!
-#
-
-permalink: pretty
-
-# Jekyll 3 now only supports Kramdown for Markdown
-kramdown:
-  # Use GitHub flavored markdown, including triple backtick fenced code blocks
-  input: GFM
-  # Jekyll 3 and GitHub Pages now support rouge for syntax highlighting
-  syntax_highlighter: rouge
+# Build settings
+markdown: kramdown                  # Specifies the Markdown processor
+kramdown:                          # Kramdown-specific settings
+  math_engine: katex               # Uses KaTeX for math rendering
+  syntax_highlighter: null        # Code syntax highlighting (null because we'll use prism.js not rouge)
   syntax_highlighter_opts:
-    # Use existing pygments syntax highlighting css
-    css_class: 'highlight'
+    disable: true
 
-# Pagination
-paginate: 5
-paginate_path: "/page/:num/"
+# Collections configuration
+collections:                       # Defines different types of content
+  projects:                       # Your projects collection
+    output: true                  # Creates individual pages for each project
+    permalink: /projects/:path/   # URL structure for project pages
+  posts:                         # Note: 'posts' is usually automatic in Jekyll
+    output: true                 # This is redundant as posts are always output
+    permalink: /posts/:path/     # URL structure for blog posts
 
-# Set the Sass partials directory, as we're using @imports
+# Default front matter settings
+defaults:                        # Automatically applies these settings to files
+  - scope:                      # First scope block for posts
+      path: ""                  # Applies to all files in the project
+      type: "posts"            # But only of type "posts"
+    values:                     # Values to apply
+      layout: "post"           # Use post.html layout
+      comments: true           # Enable comments
+  - scope:                     # Second scope block for projects
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"        # Use project.html layout
+  - scope:                     # Third scope block for pages
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"        # Use default.html layout
+
+# Plugin settings
+plugins:                       # Jekyll plugins to enable
+  - jekyll-paginate           # For pagination
+  - jekyll-sitemap            # Generates sitemap
+  - jekyll-feed               # Generates RSS feed
+  - jekyll-seo-tag           # For SEO optimization
+  - jekyll-gfm               # GitHub Flavored Markdown
+
+# Pagination settings
+paginate: 6                   # Number of posts per page
+paginate_path: "/posts/page:num/"  # Note: This conflicts with your posts permalink
+                                  # Consider changing to "/posts/page:num/"
+
+# Sass settings
 sass:
-  sass_dir: _sass
-  style: :expanded # You might prefer to minify using :compressed
+  sass_dir: _sass             # Where Sass files are stored
+  style: compressed          # Minifies the CSS output
 
-# Use the following plug-ins
-plugins:
-  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
-  - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
-  - jekyll-gist
-  - jekyll-paginate
-  - jekyll-seo-tag
-  - jemoji
-  - webrick
-  - jekyll-github-metadata
-
-# Exclude these files from your production _site
-exclude:
+# Exclude files
+exclude:                     # Files/folders to ignore when building site
   - Gemfile
   - Gemfile.lock
-  - LICENSE
+  - node_modules
+  - vendor
+  - .git/
   - README.md
-  - CNAME
-
-# Robots are welcome
-include:
-  - robots.txt
-
-# Excerpt separator
-excerpt_separator: <!--more-->

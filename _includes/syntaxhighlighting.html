@@ -1,0 +1,194 @@
+<!-- Code highlighting setup -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+
+<!-- Prism.js Core and Plugins - Note we removed the toolbar CSS and plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+<style>
+    /* Code block container with header */
+    .code-block-container {
+        margin: 1.5em 0;
+        border-radius: 6px;
+        overflow: hidden;
+        background: #2d2d2d;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    }
+
+    /* Header toolbar styling */
+    .code-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5em 1em;
+        background: #363636;
+        border-bottom: 1px solid #404040;
+    }
+
+    .code-header .title {
+        color: #e0e0e0;
+        font-family: monospace;
+        font-size: 0.9em;
+    }
+
+    .code-header .buttons {
+        display: flex;
+        gap: 0.5em;
+    }
+
+    .code-header button {
+        background: #2d2d2d;
+        color: #e0e0e0;
+        border: 1px solid #404040;
+        border-radius: 4px;
+        padding: 4px 8px;
+        font-size: 0.8em;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .code-header button:hover {
+        background: #404040;
+    }
+
+    /* Code block styling */
+    pre[class*="language-"] {
+        margin: 0 !important;
+        border-radius: 0 !important;
+        /* Set a default max-height for expanded state */
+        max-height: none;
+        /* Enable vertical scrolling */
+        overflow-y: auto;
+        /* Smooth transition for collapse/expand */
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    /* Collapsed state */
+    pre[class*="language-"].collapsed {
+        /* Fixed height when collapsed */
+        max-height: 200px !important;
+        /* Enable scrolling in collapsed state */
+        overflow-y: auto !important;
+    }
+
+    /* Line numbers styling */
+    .line-numbers .line-numbers-rows {
+        border-right: 1px solid #404040;
+        padding-right: 0.8em;
+        left: -3.8em;
+        width: 2.5em;
+    }
+
+    .line-numbers.line-numbers {
+        padding-left: 3.8em !important;
+    }
+
+    .line-numbers-rows > span:before {
+        color: #666 !important;
+        display: block;
+    }
+
+    /* Container for fade effect */
+    .code-block-wrapper {
+        position: relative;
+    }
+
+    /* Fade out effect for collapsed state */
+    .fade-overlay {
+        display: none;
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background: linear-gradient(transparent, #2d2d2d);
+        pointer-events: none;
+        margin-top: -50px; /* Pull the fade up over the content */
+    }
+
+    /* Show fade effect when collapsed */
+    pre[class*="language-"].collapsed + .fade-overlay {
+        display: block;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Add line numbers to all code blocks
+        document.querySelectorAll('pre[class*="language-"]').forEach(block => {
+            // Add line numbers class
+            block.classList.add('line-numbers');
+            
+            // Get the language class
+            const langClass = Array.from(block.classList)
+                .find(className => className.startsWith('language-'));
+            const language = langClass ? langClass.replace('language-', '') : 'text';
+            
+            // Create container and header
+            const container = document.createElement('div');
+            container.className = 'code-block-container';
+            
+            const header = document.createElement('div');
+            header.className = 'code-header';
+            
+            // Add title
+            const title = document.createElement('span');
+            title.className = 'title';
+            title.textContent = language.toUpperCase();
+            header.appendChild(title);
+            
+            // Add buttons container
+            const buttons = document.createElement('div');
+            buttons.className = 'buttons';
+            
+            // Add copy button
+            const copyBtn = document.createElement('button');
+            copyBtn.textContent = 'Copy';
+            copyBtn.onclick = () => {
+                navigator.clipboard.writeText(block.textContent);
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+            };
+            
+            // Add collapse/expand button
+            const toggleBtn = document.createElement('button');
+            toggleBtn.textContent = 'Collapse';
+            toggleBtn.onclick = () => {
+                block.classList.toggle('collapsed');
+                toggleBtn.textContent = block.classList.contains('collapsed') ? 'Expand' : 'Collapse';
+            };
+            
+            // Add buttons to header
+            buttons.appendChild(copyBtn);
+            buttons.appendChild(toggleBtn);
+            header.appendChild(buttons);
+            
+            // Create wrapper for code block and fade effect
+            const wrapper = document.createElement('div');
+            wrapper.className = 'code-block-wrapper';
+            
+            // Create fade overlay
+            const fadeOverlay = document.createElement('div');
+            fadeOverlay.className = 'fade-overlay';
+            
+            // Wrap the code block
+            block.parentNode.insertBefore(container, block);
+            container.appendChild(header);
+            wrapper.appendChild(block);
+            wrapper.appendChild(fadeOverlay);
+            container.appendChild(wrapper);
+
+            // Check if code block needs collapse button
+            // If content height is less than collapse threshold, hide the collapse button
+            if (block.clientHeight <= 200) {
+                toggleBtn.style.display = 'none';
+            }
+        });
+    });
+    
+    // Configure Prism.js autoloader path
+    window.Prism = window.Prism || {};
+    Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/';
+</script>

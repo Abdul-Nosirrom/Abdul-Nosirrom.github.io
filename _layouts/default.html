@@ -1,42 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-    <!-- MathJax for rendering LaTeX equations -->
-    <script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-    </script>
-</head>
-<body>
-    <!-- Navigation bar moved to body and wrapped in header -->
-    <header class="navbar-desktop">
-        <nav class="navbar-raw">
-            <a href="/notes" class="navbar-element navbar-element-active">/notes</a>
-            <a href="/projects" class="navbar-element">/projects</a>
-            <a href="/about" class="navbar-element">/about</a>
-        </nav>
-    </header>
+    <!-- Include the head component -->
+    {% include head.html %}
 
-    <div class="content-box">
-        <div class="profile-layout">
-            <!-- Image section -->
-            <div class="profile-image">
-                <img src="{{ '/assets/images/avatar.png' | relative_url }}" alt="Profile picture">
-            </div>
+    <body>
+        <!-- Include the header/navigation component -->
+        {% include header.html %}
         
-            <!-- Text content section -->
-            <div class="profile-content">
-                <h1>Abdulrahmen Almodaimegh</h1>
-                <p>Your brief description here spanning multiple lines if needed. The text will wrap naturally and maintain its alignment next to the image.</p>
-            </div>
-        </div>
-    </div>
-    
-    <main>
-        {{ content }}
-    </main>
-</body>
+        <main class="content">
+            <!-- This is where page content will be inserted -->
+            {{ content }}
+        </main>
+        
+        <!-- Include the footer component -->
+        {% include footer.html %}
+    </body>
 </html>

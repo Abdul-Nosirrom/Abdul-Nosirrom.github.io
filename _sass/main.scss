@@ -1,0 +1,47 @@
+// Base styles
+body {
+    margin: 0;
+    font-family: -apple-system, system-ui, sans-serif;
+    line-height: 1.6;
+}
+
+  // Layout components
+.site-header {
+    padding: 1rem;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    
+    .site-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+.content {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+  // Post and project styles
+.post, .project {
+    margin-bottom: 3rem;
+    
+    .post-header, .project-header {
+        margin-bottom: 2rem;
+    }
+    
+    .tag {
+        display: inline-block;
+        padding: 0.2rem 0.5rem;
+        margin-right: 0.5rem;
+        background: #eee;
+        border-radius: 3px;
+        font-size: 0.9rem;
+    }
+}
+
+
