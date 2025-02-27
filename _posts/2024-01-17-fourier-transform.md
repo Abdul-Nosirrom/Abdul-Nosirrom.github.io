@@ -2,7 +2,7 @@
 layout: post
 title: "Understanding the Fourier Transform"
 date: 2024-01-17
-tags: [mathematics, signal-processing]
+tags: [mathematics]
 math: true
 ---
 

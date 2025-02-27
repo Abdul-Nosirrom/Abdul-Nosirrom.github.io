@@ -1,91 +1,133 @@
-// First, let's define our color variables
-$highlight-blue: rgb(185, 231, 235);
-$highlight-purple: rgb(235, 204, 255);
-$text-color: #1b1b1b;
-
-// Base navbar styling remains the same for structure
-header.navbar-desktop {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  background-color: white;
-  z-index: 100;
+// Styling for navigation links
+.nav-links {
   display: flex;
   justify-content: center;
-}
-
-nav.navbar-raw {
-  display: flex;
-  padding: 5px;
-  max-width: 800px;
-  width: 100%;
-  justify-content: center;
-}
-
-// Enhanced navigation link styling with coordinated color transitions
-nav.navbar-raw a.navbar-element {
-  position: relative;
-    // Set a fixed width and center the text within it
-    width: 120px; // Adjust this value based on your longest text
-    text-align: left;
-  padding: 0.5rem 1rem;
-  margin: 0 1rem;
-  text-decoration: none !important;
-  // Start with the default text color
-  color: $text-color !important;
-  font-size: large;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, arial-rounded-bold, sans-serif;
-  font-weight: 600; // Default weight as specified
-  // Add transition for both color and background effects
-  transition: color 0.3s ease;
-  display: inline-block;
-  z-index: 1;
-  overflow: hidden; // Contains the animation
+  gap: 3rem;
   
-  // Base state for all link conditions
-  &:link, &:visited {
-    text-decoration: none !important;
-    color: $text-color !important;
-  }
-  
-  // The background highlight effect
-  &::before {
-    content: '';
-    position: absolute;
-    //bottom: 0;
-    //left: -100%; // Start off-screen to the left
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    //transform: scaleY(0.75) skewX(-10deg) rotateZ(-10deg); // Combined transforms
-    //border-radius: 25%;
-    font-weight: 800;
-    transition: all 0.3s ease; // Transition all properties
-    z-index: -1;
-    opacity: 0; // Start fully transparent
-  }
-  
-  // Hover state - change both text and background to purple
-  &:hover {
-    color: darken($highlight-purple, 40%) !important;
-    font-weight: 800; // Increased weight on hover
+  // Individual navigation links
+  a {
+    position: relative;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: color 0.2s;
+    z-index: 1;
+    overflow: visible;
+    display: inline-block;
     
+    // Diagonal drawing stroke effect
     &::before {
-      left: 0; // Slide in from the left
-      background-color: $highlight-purple;
-      opacity: 0.5;
+      content: '';
+      position: absolute;
+      top: auto;
+      left: -9px;
+      bottom: -6px;
+      height: 75%;
+      width: 0;
+      background-color: inherit;
+      border-radius: 10px;
+      z-index: -2;
+      transition: width 0.15s ease-out;
+      transform: rotate(-2deg) translateY(-30%);
+    }
+    
+    // Home/Notes links - Light blue
+    &[href="/"], 
+    &[href*="/posts"] {
+      &::before {
+        background-color: rgba(185, 231, 235, 0.8);
+      }
+      
+      &:hover, &.active {
+        color: darken(#b9e7eb, 50%);
+      }
+    }
+    
+    // Projects links - Light purple
+    &[href*="/portfolio"] {
+      &::before {
+        background-color: rgba(235, 204, 255, 0.8);
+      }
+      
+      &:hover, &.active {
+        color: darken(#ebccff, 50%);
+      }
+    }
+    
+    // About links - Light yellow
+    &[href*="/about"] {
+      &::before {
+        background-color: rgba(255, 250, 205, 0.8);
+      }
+      
+      &:hover, &.active {
+        color: darken(#fffacd, 60%);
+      }
+    }
+    
+    // Hover effect
+    &:hover::before {
+      width: calc(100% + 24px);
+    }
+    
+    // Active state
+    &.active::before {
+      width: calc(100% + 24px);
+    }
+    
+    // Add slight distortion with an additional pseudo element
+    &::after {
+      content: '';
+      position: absolute;
+      top: auto;
+      left: -9px;
+      bottom: -6px;
+      height: 60%;
+      width: 0;
+      background-color: inherit;
+      border-radius: 10px;
+      z-index: -2;
+      transition: width 0.15s ease-out 0.02s;
+      transform: rotate(-3deg) translateY(-45%);
+    }
+    
+    // Colored backgrounds for each link type
+    &[href="/"]::after {
+      background-color: rgba(185, 235, 208, 0.7);
+    }
+
+    &[href*="/posts"]::after {
+      background-color: rgba(185, 231, 235, 0.7);
+    }
+    
+    &[href*="/portfolio"]::after {
+      background-color: rgba(235, 204, 255, 0.7);
+    }
+    
+    &[href*="/about"]::after {
+      background-color: rgba(255, 250, 205, 0.7);
+    }
+    
+    &:hover::after,
+    &.active::after {
+      width: calc(100% + 18px);
     }
   }
-  
-  // Active state - change both text and background to blue
-  &.navbar-element-active {
-    color: darken($highlight-blue, 40%) !important;
-    font-weight: 800; // Increased weight for active state
+}
+
+// Media query for smaller screens
+@media (max-width: 768px) {
+  .nav-links {
+    width: 100%;
+    justify-content: space-around;
+    gap: 1rem;
     
-    &::before {
-      left: 0;
-      background-color: $highlight-blue;
-      opacity: 0.5;
+    a {
+      font-size: 1rem;
+      padding: 0.3rem 0.5rem;
     }
   }
 }

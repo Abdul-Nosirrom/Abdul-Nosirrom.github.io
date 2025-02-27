@@ -2,3 +2,20 @@
 --- 
 
 @import "main";
+
+
+/* Direct typography overrides */
+body, p, li, td, th, div, span, a, blockquote, article, section {
+    font-family: 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace !important;
+    letter-spacing: 0.03em !important;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace !important;
+    letter-spacing: -0.01em !important;
+    font-weight: 700 !important;
+  }
+  
+  .site-header, .nav-links a, .tag-item, button, .button, input, select, textarea {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+  }

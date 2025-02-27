@@ -1,0 +1,46 @@
+// _sass/_tag-filter.scss
+// Tag filtering system styles
+
+// Hide elements with this class
+.hidden {
+    display: none !important;
+}
+
+  // Tag list
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+  // Individual tag button
+.tag-item {
+    background: none;
+    border: 4px dotted #2a2a2a !important;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+    transition: all 0.2s ease;
+    
+    // Hover effect
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    // Active state (selected)
+    &.active {
+        border: 2px solid #2a2a2a !important;
+        background-color: rgba(90, 241, 255, 0.5) !important; // Light blue background
+        //border-color: rgba(185, 231, 235, 0.8) !important;
+        //font-weight: 600;
+    }
+    
+    // Tag count
+    .tag-count {
+        margin-left: 0.3rem;
+        font-size: 0.8rem;
+        opacity: 0.8;
+    }
+}

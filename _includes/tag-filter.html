@@ -1,0 +1,16 @@
+<!-- _includes/tag-filter.html -->
+<!-- 
+  SIMPLIFIED TAG FILTERING COMPONENT
+  Just shows the tag list with selectable tags
+-->
+  
+  <!-- Tags list - all available tags that can be clicked to filter posts -->
+  <div class="tag-list" id="tagList">
+    {% assign sorted_tags = site.tags | sort %}
+    {% for tag in sorted_tags %}
+      <button 
+        class="tag-item tag-filter" 
+        data-tag="{{ tag[0] | downcase | replace: ' ', '-' }}"
+      ># {{ tag[0] }} <span class="tag-count">{{ tag[1].size }}</span></button>
+    {% endfor %}
+  </div>

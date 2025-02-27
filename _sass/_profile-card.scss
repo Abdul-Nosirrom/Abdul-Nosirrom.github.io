@@ -1,0 +1,108 @@
+// Card styling with smooth expanding ripple effect
+.profile-card {
+    display: flex;                      // Use flexbox for layout
+    align-items: flex-start;            // Align items to the top
+    border: 1px solid #333;             // Darker, black-ish border
+    border-radius: 8px;                 // Rounded corners
+    padding: 1.5rem;                    // Inner spacing
+    margin-bottom: 1.5rem;              // Space below card
+    background-color: rgba(213, 215, 58, 0.166); // Very light tint of the highlight blue
+    position: relative;                 // For the ripple effect positioning
+    overflow: visible;                  // Allow ripple to extend outside
+    transition: all 0.3s;               // Smooth transition for all properties
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); // Subtle shadow for depth
+    
+    // Multiple ripple effects using inset property instead of scale
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        top: 0;                         // Start at card edge
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 2px solid rgba(0, 0, 0, 0.8); // Dark border with some transparency
+        border-radius: 8px;             // Match card border radius
+        opacity: 0;                     // Start invisible
+        pointer-events: none;           // Don't interfere with hover
+        z-index: -1;
+    }
+    
+    // Enhanced hover effect
+    &:hover {
+        transform: translateY(-1px);    // Slight lift on hover
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15); // Enhanced shadow on hover
+        background-color: rgba(184, 186, 52, 0.166); // Slightly darker tint on hover
+        
+        &::before {
+            animation: uniform-ripple 2s infinite linear;
+        }
+        
+        &::after {
+            animation: uniform-ripple 2s infinite linear 1s; // Delayed start for second ripple
+        }
+    }
+    
+    // Profile image styling
+    .profile-image {
+        width: 100px;                   // Fixed width
+        height: 100px;                  // Fixed height
+        border-radius: 50%;             // Circular image
+        object-fit: cover;              // Maintain aspect ratio
+        margin-right: 1.5rem;           // Space to right of image
+    }
+    
+    // Container for text beside image
+    .profile-info {
+        h2 {
+            margin-top: 0;              // Remove default top margin
+        }
+    }
+    
+    // List of current activities
+    .current-activities {
+        list-style: none;               // Remove bullets
+        padding-left: 0;                // Remove default padding
+        margin-bottom: 0;               // Remove default bottom margin
+        
+        li {
+            margin-bottom: 0.5rem;      // Space between items
+        }
+    }
+    
+    // Style variations
+    &.intro-card {
+        display: block;                 // Regular block display (not flex)
+        
+        // Remove margin from last paragraph
+        p:last-child {
+            margin-bottom: 0;
+        }
+        
+        // "About me" link
+        .about-link {
+            font-weight: 600;           // Make link semi-bold
+        }
+    }
+}
+
+// Uniform outward expanding ripple using inset values rather than scale
+@keyframes uniform-ripple {
+    0% {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.8;
+        border-color: rgba(0, 0, 0, 0.8);
+        border-radius: 8px;
+    }
+    100% {
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+        opacity: 0;
+        border-color: rgba(0, 0, 0, 0);
+        border-radius: 16px;
+    }
+}

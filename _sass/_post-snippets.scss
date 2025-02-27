@@ -1,0 +1,288 @@
+// ----------------------------------------
+// POST SNIPPETS AND TAG STYLING
+// ----------------------------------------
+// This file contains all the styling for post listings and tag clouds
+// displayed on the home page and other locations throughout the site.
+// ----------------------------------------
+
+// Variables
+// ----------------------------------------
+// Centralized variables for consistent styling and easy modifications
+$tag-border-color: #2a2a2a;        // Color for tag borders
+$tag-background: white;            // Background color for tags
+$tag-hover-background: #f0f0f0;    // Background color for tags on hover
+$post-border-color: #2a2a2a;       // Color for post borders
+$post-background: white;           // Background color for posts
+
+// Tag cloud styling
+// ----------------------------------------
+// Styles for the collection of topic tags displayed above posts
+.tag-list {
+    display: flex;                   // Use flexbox for horizontal layout
+    flex-wrap: wrap;                 // Allow tags to wrap to next line when needed
+    gap: 0.8rem;                     // Space between tags
+    margin: 1.5rem 0;                // Vertical spacing around the tag cloud
+
+    // Individual tag styling
+    .tag-item {
+        display: inline-flex;          // Use inline-flex for proper alignment
+        align-items: center;           // Center content vertically
+        padding: 0.3rem 0.8rem;        // Inner spacing
+        border: 1px solid $tag-border-color; // Tag border
+        border-radius: 1.5rem;         // Rounded pill shape
+        background-color: $tag-background; // Background color
+        font-size: 0.9rem;             // Slightly smaller text
+        text-decoration: none;         // Remove underline from links
+        color: $tag-border-color;      // Text color
+        transition: all 0.2s ease;     // Smooth transition for hover effects
+        
+        // Hover state
+        &:hover {
+            background-color: $tag-hover-background; // Slightly darker background on hover
+            //transform: translateY(-2px); // Slight upward movement on hover
+        }
+        
+        // Tag count badge
+        .tag-count {
+            margin-left: 0.4rem;         // Space between tag name and count
+            font-size: 0.75rem;          // Smaller text for count
+            opacity: 0.8;                // Slightly transparent
+            position: relative;          // For fine-tuning position
+            top: -0.5px;                 // Slight vertical adjustment for alignment
+        }
+    }
+}
+
+// Post snippets styling
+// ----------------------------------------
+// Styles for the list of post previews/cards
+.post-list {
+    // Post item with diagonal image clip
+    // Maintains consistent style across screen sizes
+    .post-item {
+        display: flex;
+        border: 4px solid #141b24;      // Bold border
+        border-radius: 1rem;            // Rounded corners
+        overflow: hidden;               // Hide overflow for clean edges
+        background-color: white;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        text-decoration: none;
+        color: inherit;
+        margin-bottom: 1.5rem;
+        position: relative;             // For absolute positioning of elements
+        
+        // Set consistent proportions with aspect ratio
+        width: 100%;                // Use full width of container
+        max-width: 100%;            // Ensure it doesn't exceed container
+        min-width: 600px !important;           // Minimum width to maintain proportions
+        aspect-ratio: 3 / 1 !important;        // Maintain aspect ratio
+        max-height: 200px;           // Remove max-height restriction
+        min-height: 180px;          // Increase minimum height
+        
+        &:hover {
+            transform: translateY(-3px);  // Slight lift on hover
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            min-width: auto;        // Allow flexible width on mobile
+            width: 100%;            // Full width on mobile
+            min-height: 160px;      // Slightly smaller on mobile
+        }
+    }
+    
+    // Post content section
+    .post-content {
+        width: 58%;                     // Width of content area
+        padding: 1.5rem;                // Inner spacing
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        justify-content: space-between; // Distribute content vertically
+        
+        // Title with icon support
+        .post-title {
+            font-size: 1.5rem;           // Large text for title
+            font-weight: 700;            // Bold text
+            margin: 0 0 0.5rem 0;        // Bottom margin only
+            line-height: 1.3;
+            display: flex;
+            align-items: flex-start;     // Align to top for icons
+            gap: 0.5rem;
+            
+            // Icon if present
+            img {
+                width: 1.5rem;
+                height: 1.5rem;
+                object-fit: contain;
+                margin-top: 0.25rem;     // Align with text
+            }
+        }
+        
+        // Post summary
+        .post-summary {
+            font-family: 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+            font-size: 0.9rem;           // Monospaced font, slightly smaller
+            margin-bottom: 0.5rem;       // Space below
+            line-height: 1.2;            // Comfortable line height
+            flex: 1;                     // Allow to expand to fill space
+        }
+        
+        // Post date - bold style
+        .post-date {
+            font-size: 1.1rem;           // Slightly larger text
+            font-weight: 700;            // Bold text
+            color: #000;                 // Black text
+            margin-top: auto;            // Push to bottom
+        }
+        
+        // Post tags
+        .post-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.25rem;         // Space above
+        }
+    }
+    
+    // Diagonal separator - creates the angled division
+    .post-diagonal {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 35%;                      // Position from right edge
+        width: 5%;                       // Width of diagonal
+        background: white;
+        clip-path: polygon(0 0, 0% 100%, 100% 0%); // Triangle shape
+        z-index: 2;                      // Above base, below content
+    }
+    
+    // Post thumbnail section
+    .post-thumbnail {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 40%;                      // Width of image area
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;           // Cover area without distortion
+        }
+    }
+}
+
+// Improved responsive adjustments
+// ----------------------------------------
+// Better adaptations for different screen sizes that maintain the diagonal style
+@media (max-width: 1024px) {
+    .post-list {
+        .post-item {
+            aspect-ratio: 2.5 / 1;       // Slightly shorter proportion
+        }
+        
+        .post-content {
+            width: 50%;                  // Slightly narrower content area
+            padding: 1.2rem;             // Less padding
+            
+            .post-title {
+                font-size: 1.3rem;        // Smaller title
+            }
+            
+            .post-summary {
+                font-size: 0.85rem;       // Smaller summary
+            }
+        }
+        
+        .post-diagonal {
+            right: 50%;                   // Adjust position
+            width: 5%;                    // Maintain width
+        }
+        
+        .post-thumbnail {
+            width: 55%;                   // Slightly wider thumbnail
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .post-list {
+        .post-item {
+            aspect-ratio: 2.2 / 1;        // Even shorter proportion
+            min-height: 120px;            // Smaller minimum height
+        }
+        
+        .post-content {
+            width: 45%;                   // Narrower content
+            padding: 1rem;                // Less padding
+            
+            .post-title {
+                font-size: 1.1rem;         // Smaller title
+                margin-bottom: 0.3rem;     // Less space below
+            }
+            
+            .post-summary {
+                font-size: 0.8rem;         // Smaller summary
+                line-height: 1.3;          // Tighter line height
+                margin-bottom: 0.3rem;     // Less space
+            }
+            
+            .post-date {
+                font-size: 0.9rem;         // Smaller date
+            }
+        }
+        
+        .post-diagonal {
+            right: 55%;                    // Adjust position
+        }
+        
+        .post-thumbnail {
+            width: 60%;                    // Wider thumbnail
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .post-list {
+        .post-item {
+            aspect-ratio: 1.8 / 1;         // Shorter for mobile
+            min-height: 100px;             // Even smaller height
+        }
+        
+        .post-content {
+            width: 45%;                    // Maintain proportion
+            padding: 0.8rem;               // Minimal padding
+            
+            .post-title {
+                font-size: 1rem;           // Minimum readable size
+            }
+            
+            .post-summary {
+                font-size: 0.75rem;        // Very small but still readable
+                display: -webkit-box;      // Enable text truncation
+                -webkit-line-clamp: 2;     // Show max 2 lines
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
+    }
+}
+
+// Section heading styles
+// ----------------------------------------
+// Styles for major section headings
+.section-heading {
+    font-size: 2rem;                 // Large text for headings
+    font-weight: 700;                // Bold text
+    margin-bottom: 0.5rem;           // Space below
+
+    // Optional decorative underline
+    &::after {
+        content: '';                   // Empty content for pseudo-element
+        display: block;                // Block display for line
+        width: 3rem;                   // Width of underline
+        height: 3px;                   // Height/thickness of underline
+        background-color: $tag-border-color; // Color matches tags
+        margin-top: 0.5rem;            // Space between text and line
+    }
+}

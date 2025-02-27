@@ -1,0 +1,146 @@
+// Gridded paper header with torn edge effect
+.site-header {
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    margin: 0 auto;
+    overflow: visible;
+
+    // Main background with paper texture and grid
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f5f5f5; // Light paper color
+        background-image: 
+            url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"),
+            linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px),
+            linear-gradient(0deg, rgba(0,0,0,0.1) 1px, transparent 1px);
+        background-size: 100% 100%, 20px 20px, 20px 20px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        z-index: -1;
+    }
+
+    // Torn paper edge effect
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 12px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 20' preserveAspectRatio='none'%3E%3Cpath d='M0,0 C10,8 25,4 30,6 C40,10 50,2 60,6 C70,10 80,0 90,8 C100,14 110,6 120,4 C130,2 140,10 150,8 C160,6 170,0 180,4 C190,7 200,12 210,8 C220,4 230,2 240,6 C250,10 260,8 270,3 C280,0 290,5 300,8 C310,11 320,7 330,4 C340,2 350,8 360,10 C370,12 380,6 390,2 C400,0 410,6 420,10 C430,14 440,8 450,4 C460,0 470,6 480,10 C490,14 500,8 510,6 C520,4 530,10 540,15 C550,18 560,10 570,5 C580,0 590,5 600,10 C610,15 620,10 630,5 C640,0 650,5 660,10 C670,15 680,10 690,5 C700,0 710,5 720,10 C730,15 740,10 750,5 C760,0 770,5 780,10 C790,15 800,10 810,5 C820,0 830,5 840,10 C850,15 860,8 870,4 C880,0 890,6 900,10 C910,14 920,8 930,4 C940,0 950,6 960,12 C970,16 980,10 990,6 L1000,10 L1000,20 L0,20 Z' fill='%23f5f5f5'/%3E%3C/svg%3E");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+        z-index: -1;
+    }
+
+    // Container for navigation elements
+    .site-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0.8rem 1rem;
+    }
+
+    // Style links to match gridded paper
+    .nav-links {
+        a {
+            color: #333; // Darker text for better contrast on paper
+            
+            &.active {
+                // Add a marker-style underline for active pages
+                position: relative;
+                
+                &::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                background-color: rgba(255, 111, 111, 0.6); // Light red marker color
+                border-radius: 2px;
+                }
+            }
+            
+            &:hover {
+                // Light pen/pencil style hover effect
+                text-decoration: none;
+                position: relative;
+            }
+        }
+    }
+}
+
+// Important: These are separate selectors, not nested inside .site-header
+// Notebook style
+.notebook-style {
+&::before {
+    // Add notebook hole style
+    background-image: 
+    // Notebook holes
+    radial-gradient(circle, rgba(0,0,0,0.1) 2px, transparent 2px),
+    // Vertical grid lines
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px),
+    // Horizontal grid lines
+    linear-gradient(0deg, rgba(0,0,0,0.05) 1px, transparent 1px) !important;
+    background-position: 
+    15px center, // Position of holes
+    0 0, // Position of vertical lines
+    0 0 !important; // Position of horizontal lines
+    background-size: 
+    30px 30px, // Size of holes (spacing)
+    20px 20px, // Size of vertical grid
+    20px 20px !important; // Size of horizontal grid
+    background-repeat: repeat-y, repeat, repeat !important;
+    padding-left: 30px !important; // Add space for the holes
+}
+
+.site-nav {
+    padding-left: 40px !important; // Move navigation to account for holes
+}
+}
+
+// Quad paper style
+.quad-paper {
+&::before {
+    background-color: #f8fffa !important; // Very light green tint
+    background-image: 
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"),
+    linear-gradient(90deg, rgba(0,120,0,0.05) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(0,120,0,0.05) 1px, transparent 1px) !important;
+    background-size: 100% 100%, 20px 20px, 20px 20px !important;
+}
+}
+
+// Vintage lined paper style
+.vintage-paper {
+&::before {
+    background-color: #fffbeb !important; // Cream/off-white color
+    background-image: 
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E"),
+    linear-gradient(0deg, rgba(70,30,0,0.05) 1px, transparent 1px) !important;
+    background-size: 100% 100%, 100% 24px !important;
+}
+
+&::after {
+    background-image: 
+    linear-gradient(90deg, rgba(220,0,0,0.2) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 20' preserveAspectRatio='none'%3E%3Cpath d='M0,0 C10,8 25,4 30,6 C40,10 50,2 60,6 C70,10 80,0 90,8 C100,14 110,6 120,4 C130,2 140,10 150,8 C160,6 170,0 180,4 C190,7 200,12 210,8 C220,4 230,2 240,6 C250,10 260,8 270,3 C280,0 290,5 300,8 C310,11 320,7 330,4 C340,2 350,8 360,10 C370,12 380,6 390,2 C400,0 410,6 420,10 C430,14 440,8 450,4 C460,0 470,6 480,10 C490,14 500,8 510,6 C520,4 530,10 540,15 C550,18 560,10 570,5 C580,0 590,5 600,10 C610,15 620,10 630,5 C640,0 650,5 660,10 C670,15 680,10 690,5 C700,0 710,5 720,10 C730,15 740,10 750,5 C760,0 770,5 780,10 C790,15 800,10 810,5 C820,0 830,5 840,10 C850,15 860,8 870,4 C880,0 890,6 900,10 C910,14 920,8 930,4 C940,0 950,6 960,12 C970,16 980,10 990,6 L1000,10 L1000,20 L0,20 Z' fill='%23fffbeb'/%3E%3C/svg%3E") !important;
+    background-size: 24px 100%, 100% 100% !important;
+    background-position: 24px 0, 0 0 !important;
+    background-repeat: repeat-y, no-repeat !important;
+    height: calc(100% + 12px) !important; // Extend to include torn edge
+    top: 0 !important;
+    bottom: auto !important;
+}
+}

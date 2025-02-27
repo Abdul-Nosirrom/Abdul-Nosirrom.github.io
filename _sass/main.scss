@@ -1,47 +1,159 @@
-// Base styles
+// ----------------------------------------
+// VARIABLES
+// ----------------------------------------
+// These colors are taken from your examples and navbar SCSS
+$highlight-blue: rgb(185, 231, 235);    // Light blue highlight color used for active nav items
+$highlight-purple: rgb(235, 204, 255);  // Light purple highlight color used for hover states
+$text-color: #1b1b1b;                  // Nearly black text color for good readability
+$background-color: #fff;               // White background
+$border-color: #eee;                   // Light gray for borders
+
+// Imports
+// ----------------------------------------
+// Component-specific styles, loaded in order of dependency
+@import "typography";
+@import "site-header";      // Header container and paper styling
+@import "navbar";       // Navigation links and interaction styles
+@import "links";
+@import "tag-filter";
+@import "profile-card";     // Profile information cards
+@import "post-snippets";    // Post listings and tag cloud styles
+
+// ----------------------------------------
+// BASE STYLES
+// ----------------------------------------
+// Basic styling applied to the entire document
 body {
-    margin: 0;
-    font-family: -apple-system, system-ui, sans-serif;
-    line-height: 1.6;
+    margin: 0;                          // Remove default margins
+    font-family: -apple-system, system-ui, sans-serif;  // System font stack for clean typography
+    line-height: 1.6;                   // Comfortable line height for reading
+    color: $text-color;                 // Use our text color variable
 }
 
-  // Layout components
-.site-header {
-    padding: 1rem;
-    background: #fff;
-    border-bottom: 1px solid #eee;
+// Default link styling
+a {
+    color: $text-color;                 // Links are same color as text by default
+    text-decoration: none;              // No underline by default
     
-    .site-nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 1200px;
-        margin: 0 auto;
+    &:hover {
+        text-decoration: underline;     // Add underline on hover for better usability
     }
 }
 
+// ----------------------------------------
+// MAIN CONTENT CONTAINER
+// ----------------------------------------
+// Container for the main page content
 .content {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    max-width: 800px;                   // Limit width for readability
+    margin: 2rem auto;                  // Center and add vertical spacing
+    padding: 0 1rem;                    // Add horizontal padding
 }
 
-  // Post and project styles
-.post, .project {
-    margin-bottom: 3rem;
-    
-    .post-header, .project-header {
-        margin-bottom: 2rem;
+// ----------------------------------------
+// HOME PAGE SPECIFIC STYLES
+// ----------------------------------------
+// Styling for the home page layout
+.home-container {
+    // Each major section of the home page
+    section {
+        margin-bottom: 3rem;            // Space between sections
     }
     
-    .tag {
-        display: inline-block;
-        padding: 0.2rem 0.5rem;
-        margin-right: 0.5rem;
-        background: #eee;
-        border-radius: 3px;
-        font-size: 0.9rem;
+    // Section headings
+    h2 {
+        font-size: 1.5rem;              // Slightly smaller than default h2
+        margin-bottom: 1rem;            // Space below headings
     }
 }
 
+// First section with profile information
+.profile-section {
+    margin-top: 2rem;                   // Space above profile section
+}
 
+// ----------------------------------------
+// PROJECTS GRID
+// ----------------------------------------
+// Styling for the projects showcase grid
+
+// Grid container
+.projects-grid {
+    display: grid;                      // Use CSS Grid for layout
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));  // Responsive grid
+    gap: 1.5rem;                        // Space between grid items
+    margin: 1.5rem 0;                   // Vertical spacing
+    
+    // Individual project card
+    .project-card {
+        border: 1px solid $border-color;  // Light border
+        border-radius: 8px;              // Rounded corners
+        overflow: hidden;                // Hide overflow for image
+        transition: transform 0.2s;      // Smooth transform animation
+        
+        // Hover effect (slight lift)
+        &:hover {
+            transform: translateY(-3px);  // Move up slightly on hover
+        }
+        
+        // Project image container
+        .project-image {
+            // Project thumbnail
+            img {
+                width: 100%;             // Full width of container
+                display: block;          // Block display (no extra space)
+                aspect-ratio: 16/9;      // Maintain 16:9 aspect ratio
+                object-fit: cover;       // Cover container while maintaining aspect ratio
+            }
+        }
+        
+        // Project text information
+        .project-info {
+            padding: 1rem;              // Inner spacing
+            
+            // Project title
+            h3 {
+                margin-top: 0;           // Remove default top margin
+                margin-bottom: 0.5rem;   // Space below title
+            }
+            
+            // Project description
+            p {
+                margin-bottom: 0;        // Remove default bottom margin
+                font-size: 0.9rem;       // Slightly smaller text
+            }
+        }
+    }
+}
+
+// "View all" links
+.view-all-link {
+    display: inline-block;              // Inline-block for proper sizing
+    font-weight: 600;                   // Semi-bold text
+    margin-top: 1rem;                   // Space above link
+}
+
+// ----------------------------------------
+// RESPONSIVE ADJUSTMENTS
+// ----------------------------------------
+// Media queries for responsive design
+
+// Styles for screens smaller than 768px (tablets and phones)
+@media (max-width: 768px) {
+    // Stack profile image and info vertically
+    .profile-card {
+        flex-direction: column;         // Change to vertical layout
+        text-align: center;             // Center text
+        
+        // Adjust profile image spacing
+        .profile-image {
+            margin-right: 0;            // Remove right margin
+            margin-bottom: 1rem;        // Add bottom margin
+        }
+    }
+    
+    // Make projects display in a single column
+    .projects-grid {
+        grid-template-columns: 1fr;     // Single column
+    }
+}

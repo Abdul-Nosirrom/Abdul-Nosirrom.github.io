@@ -1,0 +1,78 @@
+// ----------------------------------------
+// TEXT LINK STYLING
+// Styles for hyperlinks within content areas only
+// ----------------------------------------
+
+// Content area selectors
+// Add or modify these selectors to match your specific content areas
+.post-content a,
+.page-content a,
+.profile-card p a,
+.post-summary a,
+p a,
+li a,
+td a,
+figcaption a,
+blockquote a {
+  color: $text-color;                     // Use main text color for consistency
+  text-decoration: none;                  // Remove default underline
+  border-bottom: 2px dotted $text-color;  // Thicker dotted underline
+  position: relative;                     // For positioning the highlight effect
+  transition: all 0.2s ease;              // Smooth transition for all properties
+  padding: 0 2px;                         // Small horizontal padding for highlight effect
+  font-weight: normal;                    // Default font weight
+  display: inline-block;                  // Needed for proper highlight positioning
+  
+  // Primary highlight layer
+  &::before {
+    content: '';                          // Required for pseudo-elements
+    position: absolute;                   // Position relative to link
+    top: auto;                            // Don't set top position
+    left: -6px;                           // Extend left beyond text
+    bottom: -4px;                         // Position below the text
+    height: 75%;                          // Cover most of the text height
+    width: 0;                             // Start with no width
+    background-color: rgba(185, 231, 235, 0.8); // Light blue highlighter color
+    border-radius: 8px;                   // Rounded corners for highlighter
+    z-index: -2;                          // Position behind text
+    transition: width 0.15s ease-out;     // Quick, natural transition
+    transform: rotate(-2deg) translateY(-30%); // Slight angle
+  }
+  
+  // Secondary highlight layer
+  &::after {
+    content: '';                          // Required for pseudo-elements
+    position: absolute;                   // Position relative to link
+    top: auto;                            // Don't set top position
+    left: -6px;                           // Extend left beyond text
+    bottom: -4px;                         // Position below the text
+    height: 60%;                          // Slightly shorter than primary layer
+    width: 0;                             // Start with no width
+    background-color: rgba(185, 231, 235, 0.6); // Lighter blue for second layer
+    border-radius: 8px;                   // Rounded corners for highlighter
+    z-index: -3;                          // Position behind primary layer
+    transition: width 0.15s ease-out 0.02s; // Slightly delayed transition
+    transform: rotate(-3deg) translateY(-45%); // Different angle for variation
+  }
+  
+  // Hover state
+  &:hover {
+    border-bottom-color: transparent;     // Hide dotted line on hover
+    font-weight: 600;                     // Bolder text on hover
+    color: darken(#b9e7eb, 50%);          // Darker blue text on hover
+    
+    &::before {
+      width: calc(100% + 14px);           // Expand highlight to full width plus padding
+    }
+    
+    &::after {
+      width: calc(100% + 10px);           // Slightly shorter width for second layer
+    }
+  }
+}
+
+// Optional: Basic global link reset to ensure consistent styling across browsers
+a {
+  color: inherit;
+  text-decoration: none;
+}
