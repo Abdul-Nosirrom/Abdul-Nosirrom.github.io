@@ -1,0 +1,109 @@
+// ----------------------------------------
+// FOOTER STYLING
+// Styles for the site footer
+// ----------------------------------------
+
+.site-footer {
+    margin-top: 4rem;
+    padding: 2rem 0;
+    background-color: #f5f5f5;
+    position: relative;
+    font-family: $navbar-font;
+    
+    // Grid paper background effect
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"),
+      linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+    background-size: 100% 100%, 20px 20px, 20px 20px;
+    
+    // Torn paper edge effect at top
+    &::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 0;
+      width: 100%;
+      height: 12px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 20' preserveAspectRatio='none'%3E%3Cpath d='M0,20 C10,12 25,16 30,14 C40,10 50,18 60,14 C70,10 80,20 90,12 C100,6 110,14 120,16 C130,18 140,10 150,12 C160,14 170,20 180,16 C190,13 200,8 210,12 C220,16 230,18 240,14 C250,10 260,12 270,17 C280,20 290,15 300,12 C310,9 320,13 330,16 C340,18 350,12 360,10 C370,8 380,14 390,18 C400,20 410,14 420,10 C430,6 440,12 450,16 C460,20 470,14 480,10 C490,6 500,12 510,14 C520,16 530,10 540,5 C550,2 560,10 570,15 C580,20 590,15 600,10 C610,5 620,10 630,15 C640,20 650,15 660,10 C670,5 680,10 690,15 C700,20 710,15 720,10 C730,5 740,10 750,15 C760,20 770,15 780,10 C790,5 800,10 810,15 C820,20 830,15 840,10 C850,5 860,12 870,16 C880,20 890,14 900,10 C910,6 920,12 930,16 C940,20 950,14 960,8 C970,4 980,10 990,14 L1000,10 L1000,0 L0,0 Z' fill='%23f5f5f5'/%3E%3C/svg%3E");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      transform: rotate(180deg);
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+      z-index: 1;
+    }
+    
+    // Footer content container
+    .footer-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      
+      // Social links
+      .social-links {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+        
+        a {
+          text-decoration: none;
+          color: $text-color;
+          font-weight: 600;
+          position: relative;
+          display: inline-block;
+          padding: 0.3rem 0.8rem;
+          transition: all 0.2s;
+          
+          // Hover brush stroke effect
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: transparent;
+            border-radius: 4px;
+            z-index: -1;
+            transition: background-color 0.2s;
+          }
+          
+          &:hover {
+            transform: translateY(-3px);
+            text-decoration: none;
+            
+            &::before {
+              background-color: rgba($highlight-blue, 0.3);
+            }
+          }
+        }
+      }
+      
+      // Footer text (copyright, etc.)
+      .footer-text {
+        opacity: 0.7;
+        font-size: 0.9rem;
+        
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+  
+  // Responsive styles
+  @media (max-width: 768px) {
+    .site-footer {
+      padding: 1.5rem 0;
+      
+      .footer-content {
+        .social-links {
+          gap: 1rem;
+        }
+      }
+    }
+  }

@@ -1,24 +1,154 @@
 ---
 layout: default
 ---
-<article class="project">
-    <header class="project-header">
-        <h1 class="project-title">{{ page.title }}</h1>
-        
-        {% if page.image %}
-        <div class="project-image">
-        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
-        </div>
-        {% endif %}
-        
-        {% if page.github %}
-        <div class="project-links">
-        <a href="{{ page.github }}" class="github-link">View on GitHub</a>
-        </div>
-        {% endif %}
-    </header>
 
-    <div class="project-content">
-        {{ content }}
+<article class="project-page">
+  <header class="project-header">
+    <h1 class="project-title">{{ page.title }}</h1>
+    
+    {% if page.tech %}
+    <div class="project-tech-list">
+      {% for tech in page.tech %}
+        <span class="tech-badge">{{ tech }}</span>
+      {% endfor %}
     </div>
+    {% endif %}
+    
+    <div class="project-meta">
+      {% if page.date %}
+      <div class="project-date">
+        <span class="meta-label">Date:</span> 
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %Y" }}</time>
+      </div>
+      {% endif %}
+      
+      {% if page.type %}
+      <div class="project-type">
+        <span class="meta-label">Project Type:</span> {{ page.type }}
+      </div>
+      {% endif %}
+      
+      {% if page.github %}
+      <div class="project-github">
+        <a href="{{ page.github }}" target="_blank" class="github-link">
+          View on GitHub
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if page.gallery %}
+  <div class="project-gallery">
+    <div class="gallery-slider">
+      {% for image in page.gallery %}
+      <div class="gallery-slide">
+        <img src="{{ image | relative_url }}" alt="Project image">
+      </div>
+      {% endfor %}
+    </div>
+    
+    {% if page.gallery.size > 1 %}
+    <div class="gallery-nav">
+      <button class="prev-slide">←</button>
+      <button class="next-slide">→</button>
+    </div>
+    
+    <div class="gallery-thumbnails">
+      {% for image in page.gallery %}
+      <div class="gallery-thumbnail">
+        <img src="{{ image | relative_url }}" alt="Thumbnail">
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% elsif page.image %}
+  <div class="project-feature-image">
+    <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+  </div>
+  {% endif %}
+
+  <div class="project-content">
+    {{ content }}
+  </div>
+  
+  <div class="project-navigation">
+    <div class="project-navigation-inner">
+      {% if page.previous.url %}
+      <a class="prev-project" href="{{ page.previous.url | relative_url }}">
+        <span class="nav-arrow">←</span>
+        <span class="nav-title">{{ page.previous.title }}</span>
+      </a>
+      {% endif %}
+      
+      <a class="back-to-projects" href="{{ '/projects' | relative_url }}">All Projects</a>
+      
+      {% if page.next.url %}
+      <a class="next-project" href="{{ page.next.url | relative_url }}">
+        <span class="nav-title">{{ page.next.title }}</span>
+        <span class="nav-arrow">→</span>
+      </a>
+      {% endif %}
+    </div>
+  </div>
 </article>
+
+{% if page.gallery.size > 1 %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Simple gallery slider implementation
+    const slides = document.querySelectorAll('.gallery-slide');
+    const thumbnails = document.querySelectorAll('.gallery-thumbnail');
+    const prevBtn = document.querySelector('.prev-slide');
+    const nextBtn = document.querySelector('.next-slide');
+    let currentSlide = 0;
+    
+    // Hide all slides except first
+    slides.forEach((slide, index) => {
+      if (index !== 0) slide.style.display = 'none';
+    });
+    
+    // Add active class to first thumbnail
+    if (thumbnails.length > 0) {
+      thumbnails[0].classList.add('active');
+    }
+    
+    // Show slide function
+    function showSlide(n) {
+      // Hide all slides
+      slides.forEach(slide => slide.style.display = 'none');
+      // Remove active class from all thumbnails
+      thumbnails.forEach(thumb => thumb.classList.remove('active'));
+      
+      // Show current slide and activate thumbnail
+      slides[n].style.display = 'block';
+      thumbnails[n].classList.add('active');
+      currentSlide = n;
+    }
+    
+    // Previous slide function
+    function prevSlide() {
+      let index = currentSlide - 1;
+      if (index < 0) index = slides.length - 1;
+      showSlide(index);
+    }
+    
+    // Next slide function
+    function nextSlide() {
+      let index = currentSlide + 1;
+      if (index >= slides.length) index = 0;
+      showSlide(index);
+    }
+    
+    // Add event listeners
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    
+    // Thumbnail click events
+    thumbnails.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => showSlide(index));
+    });
+  });
+</script>
+{% endif %}

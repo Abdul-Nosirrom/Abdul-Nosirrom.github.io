@@ -1,0 +1,156 @@
+---
+layout: default
+title: About Me
+---
+
+<div class="about-container">
+  <section class="about-hero">
+    <div class="about-profile">
+      <img src="{{ '/assets/images/avatar.png' | relative_url }}" alt="Profile Picture" class="about-avatar">
+      <div class="about-name-title">
+        <h1>{{ site.title }}</h1>
+        <div class="about-subtitle">Graphics Programmer & Technical Artist</div> <!-- Update with your actual title -->
+      </div>
+    </div>
+  </section>
+  
+  <section class="about-bio">
+    <h2 class="section-heading">About Me</h2>
+    <div class="bio-content">
+      <p>
+        <!-- Add your bio text here -->
+        Hi, I'm Abdulrahmen Almodaimegh. I'm passionate about graphics programming, 
+        technical art, and game development. Currently, I'm focused on learning Rust, 
+        developing linework, and creating games.
+      </p>
+      <p>
+        My background includes experience in shader development, Unity, and computer graphics. 
+        I love solving complex visual problems and creating tools that make artists' lives easier.
+      </p>
+      <!-- Add more paragraphs as needed -->
+    </div>
+  </section>
+  
+  <section class="about-skills">
+    <h2 class="section-heading skills-section-title">Skills & Technologies</h2>
+    <div class="skills-container">
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Languages</h3>
+          <ul class="skill-list">
+            <li>C#</li>
+            <li>HLSL/GLSL</li>
+            <li>C++</li>
+            <li>Python</li>
+            <li>Rust (Learning)</li>
+            <!-- Add or modify as needed -->
+          </ul>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Software</h3>
+          <ul class="skill-list">
+            <li>Unity</li>
+            <li>Unreal Engine</li>
+            <li>Blender</li>
+            <li>Maya</li>
+            <li>Visual Studio</li>
+            <!-- Add or modify as needed -->
+          </ul>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Specialties</h3>
+          <ul class="skill-list">
+            <li>Shader Development</li>
+            <li>Technical Art</li>
+            <li>Graphics Programming</li>
+            <li>Pipeline Development</li>
+            <li>Tool Creation</li>
+            <!-- Add or modify as needed -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+    
+  <section class="about-experience">
+    <h2 class="section-heading">Experience</h2>
+    <div class="timeline">
+      <!-- Example timeline item - duplicate and modify as needed -->
+      <div class="timeline-item">
+        <div class="timeline-date">2023 - Present</div>
+        <div class="timeline-content">
+          <h3>Technical Artist</h3>
+          <div class="timeline-organization">Example Studio</div>
+          <p>Developed shaders and graphics tools for the game engine. Created custom rendering solutions and optimized the art pipeline.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-date">2020 - 2023</div>
+        <div class="timeline-content">
+          <h3>Graphics Programmer</h3>
+          <div class="timeline-organization">Another Company</div>
+          <p>Implemented custom rendering techniques and maintained the rendering pipeline. Collaborated with artists to achieve visual targets.</p>
+        </div>
+      </div>
+      
+      <!-- Add more timeline items as needed -->
+    </div>
+  </section>
+  
+  <section class="about-education">
+    <h2 class="section-heading">Education</h2>
+    <div class="education-list">
+      <!-- Example education item - duplicate and modify as needed -->
+      <div class="education-item">
+        <div class="education-degree">BSc in Computer Science</div>
+        <div class="education-institution">Example University</div>
+        <div class="education-date">2016 - 2020</div>
+        <p>Specialized in computer graphics and game development.</p>
+      </div>
+      
+      <!-- Add more education items as needed -->
+    </div>
+  </section>
+  
+  <section class="about-contact">
+    <h2 class="section-heading">Contact</h2>
+    <div class="contact-options">
+      <div class="contact-item">
+        <div class="contact-label">Email</div>
+        <div class="contact-value">{{ site.email }}</div>
+      </div>
+      
+      <div class="contact-social">
+        <!-- Add your social links - modify as needed -->
+        {% if site.github_username %}
+        <a href="https://github.com/{{ site.github_username }}" target="_blank" class="social-link github">
+          GitHub
+        </a>
+        {% endif %}
+        
+        {% if site.linkedin_username %}
+        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" class="social-link linkedin">
+          LinkedIn
+        </a>
+        {% endif %}
+        
+        {% if site.twitter_username %}
+        <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" class="social-link twitter">
+          Twitter
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+  
+  <section class="about-cv">
+    <h2 class="section-heading">Curriculum Vitae</h2>
+    <p>You can download my full CV as a PDF:</p>
+    <a href="{{ '/assets/docs/cv.pdf' | relative_url }}" class="cv-download-button" download>
+      Download CV
+    </a>
+  </section>
+</div>

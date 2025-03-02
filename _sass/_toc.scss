@@ -1,0 +1,367 @@
+// ----------------------------------------
+// TABLE OF CONTENTS STYLING
+// ----------------------------------------
+
+// Main TOC container (inline version - kept for backwards compatibility)
+.toc-inline {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 2px solid $text-color;
+    border-radius: 8px;
+    background-color: #f9f7e8; // Light cream background - solid color
+    position: relative;
+    transition: all 0.3s;
+    
+    // Add sketch-style decoration
+    &::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      width: 20px;
+      height: 20px;
+      border-right: 3px solid $text-color;
+      border-top: 3px solid $text-color;
+      opacity: 0.7;
+      border-radius: 0 8px 0 0;
+    }
+    
+    &:hover {
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  // Sidebar TOC container
+  .toc-sidebar {
+    position: fixed;
+    top: 140px; // Adjusted to be below the header
+    left: 20px; // On the left side
+    width: 240px;
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+    padding: 1.25rem;
+    border: 2px solid $text-color;
+    border-radius: 8px;
+    background-color: #f9f7e8; // Light cream background - solid color
+    transition: all 0.3s;
+    z-index: 10;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    
+    // Sketch-style effect
+    transform: rotate(-0.5deg); // Reversed rotation direction for left side
+    
+    // Subtle noise texture
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+      z-index: -1;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+    
+    // Scrollbar styling
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+  }
+  
+  // Completely separate toggle button that appears when TOC is collapsed
+  .toc-fixed-toggle {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 60px;
+    background-color: #f9f7e8; // Match TOC background
+    border: 2px solid $text-color;
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    display: none; // Hidden by default, shown in JS
+    
+    &:hover {
+      background-color: #f0eeda; // Slightly darker on hover
+    }
+  }
+  
+  // TOC close button inside the sidebar
+  .toc-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: $text-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    padding: 0;
+  }
+  
+  // Common TOC title styling
+  .toc-title {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    position: relative;
+    display: inline-block;
+    padding-right: 30px; // Make room for close button
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $text-color;
+      opacity: 0.6;
+      // Wavy line effect
+      mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,3 C10,1 20,5 30,3 C40,1 50,5 60,3 C70,1 80,5 90,3' stroke='black' fill='none'/%3E%3C/svg%3E");
+      mask-size: 100% 100%;
+    }
+  }
+  
+  // Table of contents list with improved hierarchy visual cues
+  .table-of-contents {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+    position: relative;
+    
+    // Vertical connecting line for hierarchy
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 7px;
+      width: 1px;
+      background-color: rgba(0, 0, 0, 0.2);
+      z-index: 0;
+    }
+    
+    li {
+      position: relative;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+      
+      // Item connector dots with sketch-style
+      &::before {
+        content: '';
+        position: absolute;
+        left: 5px;
+        top: 0.7em;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: $text-color;
+        opacity: 0.6;
+        z-index: 1;
+      }
+      
+      a {
+        color: $text-color;
+        text-decoration: none;
+        display: block;
+        transition: all 0.2s;
+        font-family: $navbar-font;
+        padding: 0.2rem 0 0.2rem 16px;
+        position: relative;
+        
+        &:hover {
+          color: darken($highlight-blue, 30%);
+          background-color: rgba(255, 255, 255, 0.5);
+          transform: translateX(2px);
+          text-decoration: none;
+        }
+      }
+      
+      // Different styling for sidebar TOC links with improved hierarchy
+      .toc-sidebar & {
+        // Horizontal connecting lines for hierarchy
+        &.toc-h2, &.toc-h3, &.toc-h4, &.toc-h5, &.toc-h6 {
+          &::after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0.7em;
+            width: 5px;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.2);
+            z-index: 0;
+          }
+        }
+        
+        // Highlight for active link
+        &.toc-active > a {
+          color: darken($highlight-blue, 30%);
+          font-weight: 600;
+          background-color: rgba(255, 255, 255, 0.7); // White highlight background
+        }
+        
+        // Display hierarchy with indentation and connecting lines
+        &.toc-h1 {
+          > a {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 0.3rem;
+          }
+          
+          &::before {
+            background-color: darken($highlight-blue, 20%);
+            width: 7px;
+            height: 7px;
+            left: 4px;
+          }
+        }
+        
+        &.toc-h2 {
+          > a {
+            padding-left: 24px;
+            font-size: 0.9rem;
+          }
+          
+          &::after {
+            width: 12px;
+          }
+          
+          &::before {
+            left: 17px;
+          }
+        }
+        
+        &.toc-h3 {
+          > a {
+            padding-left: 36px;
+            font-size: 0.85rem;
+          }
+          
+          &::after {
+            width: 24px;
+          }
+          
+          &::before {
+            left: 29px;
+          }
+        }
+        
+        &.toc-h4 {
+          > a {
+            padding-left: 48px;
+            font-size: 0.8rem;
+          }
+          
+          &::after {
+            width: 36px;
+          }
+          
+          &::before {
+            left: 41px;
+          }
+        }
+        
+        &.toc-h5, &.toc-h6 {
+          > a {
+            padding-left: 60px;
+            font-size: 0.75rem;
+          }
+          
+          &::after {
+            width: 48px;
+          }
+          
+          &::before {
+            left: 53px;
+          }
+        }
+      }
+    }
+  }
+  
+  // Important: Main content should not be affected by TOC
+  // We'll use a max-width for the content itself
+  .post-content {
+    max-width: 750px; // Set maximum width for content
+    margin: 0 auto; // Center the content
+  }
+  
+  .post-header, .post-footer, .post-featured-image {
+    max-width: 750px; // Match content width
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  // Responsive adjustments
+  @media (max-width: 1200px) {
+    .toc-sidebar {
+      width: 220px;
+    }
+  }
+  
+  // Below this width, hide TOC and show toggle button
+  @media (max-width: 1100px) {
+    .toc-sidebar {
+      display: none; // Hide by default on narrow screens
+      
+      &.visible {
+        display: block; // Show when toggled
+      }
+    }
+    
+    .toc-fixed-toggle {
+      display: flex; // Show the toggle button
+    }
+  }
+  
+  // For smaller screens, make the TOC float at the bottom
+  @media (max-width: 768px) {
+    .post-content, .post-header, .post-footer, .post-featured-image {
+      max-width: 100%; // Full width on small screens
+    }
+    
+    .toc-sidebar {
+      top: auto;
+      bottom: 20px;
+      max-height: 300px;
+      width: 240px;
+      transform: rotate(0);
+      
+      .toc-title {
+        font-size: 1rem;
+      }
+    }
+    
+    .toc-fixed-toggle {
+      top: auto;
+      bottom: 50%;
+      transform: translateY(50%);
+    }
+  }

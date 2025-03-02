@@ -1,0 +1,476 @@
+// ----------------------------------------
+// PORTFOLIO GRID STYLING
+// Styles for the portfolio page and project grids
+// ----------------------------------------
+
+// Portfolio container
+.portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    
+    .page-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      
+      // Sketchy underline
+      position: relative;
+      display: inline-block;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background-color: $text-color;
+        opacity: 0.8;
+        // Wavy line effect
+        mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,4 C10,0 20,8 30,4 C40,0 50,8 60,4 C70,0 80,8 90,4 C95,2 100,4 100,4' stroke='black' fill='none'/%3E%3C/svg%3E");
+        mask-size: 100% 100%;
+      }
+    }
+    
+    .page-description {
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      max-width: 80%;
+    }
+  }
+  
+  // Portfolio filters
+  .portfolio-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+    
+    .filter-button {
+      background: none;
+      border: 2px solid $text-color;
+      border-radius: 1.5rem;
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      
+      // Sketchy button style
+      border-style: solid;
+      border-color: $text-color;
+      font-family: $navbar-font;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: transparent;
+        border-radius: inherit;
+        transition: background-color 0.2s ease;
+        z-index: -1;
+      }
+      
+      &:hover {
+        transform: translateY(-2px);
+        
+        &::before {
+          background-color: rgba($highlight-blue, 0.3);
+        }
+      }
+      
+      &.active {
+        background-color: $highlight-blue;
+        border-color: darken($highlight-blue, 20%);
+        font-weight: 600;
+      }
+    }
+  }
+  
+  // Projects grid (shared with home page)
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+    
+    // Individual project card
+    .project-card {
+      position: relative;
+      background-color: $background-color;
+      border: 3px solid $text-color;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s;
+      transform-origin: center;
+      
+      // Sketchy border effect
+      border-style: solid;
+      
+      // Add faux rotation for sketchy look
+      transform: rotate(0.3deg);
+      
+      &:nth-child(2n) {
+        transform: rotate(-0.2deg);
+      }
+      
+      &:nth-child(3n) {
+        transform: rotate(0.1deg);
+      }
+      
+      &:hover {
+        transform: translateY(-8px) rotate(0.3deg);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        
+        .project-image img {
+          transform: scale(1.05);
+        }
+        
+        &:nth-child(2n) {
+          transform: translateY(-8px) rotate(-0.2deg);
+        }
+        
+        &:nth-child(3n) {
+          transform: translateY(-8px) rotate(0.1deg);
+        }
+      }
+      
+      // Project link (entire card is clickable)
+      .project-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+      }
+      
+      // Project image
+      .project-image {
+        height: 200px;
+        overflow: hidden;
+        
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+      }
+      
+      // Project info section
+      .project-info {
+        padding: 1.2rem;
+        
+        h3 {
+          margin-top: 0;
+          margin-bottom: 0.5rem;
+          font-size: 1.3rem;
+        }
+        
+        // Project tech tags
+        .project-tech {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-top: 0.8rem;
+          
+          .tech-tag {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            background-color: rgba($highlight-purple, 0.4);
+            border-radius: 4px;
+            font-family: $navbar-font;
+          }
+        }
+        
+        // Project type label
+        .project-type {
+          margin-top: 0.8rem;
+          font-size: 0.9rem;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  
+  // Individual project page styling
+  .project-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+    
+    // Project header section
+    .project-header {
+      margin-bottom: 2rem;
+      
+      .project-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        
+        // Sketchy underline
+        position: relative;
+        display: inline-block;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background-color: $text-color;
+          opacity: 0.7;
+          // Wavy line effect using mask
+          mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,4 C10,0 20,8 30,4 C40,0 50,8 60,4 C70,0 80,8 90,4 C95,2 100,4 100,4' stroke='black' fill='none'/%3E%3C/svg%3E");
+          mask-size: 100% 100%;
+        }
+      }
+      
+      // Tech badges
+      .project-tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+        
+        .tech-badge {
+          padding: 0.3rem 0.8rem;
+          background-color: rgba($highlight-purple, 0.4);
+          border-radius: 1rem;
+          font-size: 0.9rem;
+          font-family: $navbar-font;
+        }
+      }
+      
+      // Project metadata section
+      .project-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        font-family: $navbar-font;
+        
+        .meta-label {
+          font-weight: 600;
+        }
+        
+        // GitHub link
+        .github-link {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.5rem 1rem;
+          background-color: #24292e;
+          color: white;
+          border-radius: 4px;
+          text-decoration: none;
+          transition: background-color 0.2s;
+          
+          &:hover {
+            background-color: #0366d6;
+          }
+          
+          // GitHub icon
+          .github-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+    }
+    
+    // Project feature image
+    .project-feature-image {
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+    }
+    
+    // Image gallery
+    .project-gallery {
+      margin-bottom: 2rem;
+      
+      // Slider container
+      .gallery-slider {
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.05);
+        
+        .gallery-slide {
+          img {
+            width: 100%;
+            height: auto;
+            display: block;
+          }
+        }
+      }
+      
+      // Gallery navigation
+      .gallery-nav {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+        
+        button {
+          background: none;
+          border: 2px solid $text-color;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          cursor: pointer;
+          font-size: 1.2rem;
+          transition: all 0.2s;
+          
+          &:hover {
+            background-color: rgba($highlight-blue, 0.3);
+          }
+        }
+      }
+      
+      // Thumbnails
+      .gallery-thumbnails {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        
+        .gallery-thumbnail {
+          width: 80px;
+          height: 60px;
+          border-radius: 4px;
+          overflow: hidden;
+          opacity: 0.7;
+          cursor: pointer;
+          transition: all 0.2s;
+          
+          &:hover, &.active {
+            opacity: 1;
+            box-shadow: 0 0 0 2px $text-color;
+          }
+          
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+    
+    // Project content
+    .project-content {
+      line-height: 1.6;
+      font-size: 1.1rem;
+      
+      h2 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+      }
+      
+      h3 {
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        font-size: 1.4rem;
+      }
+      
+      p {
+        margin-bottom: 1.5rem;
+      }
+      
+      img {
+        max-width: 100%;
+        border-radius: 4px;
+        margin: 1.5rem 0;
+      }
+      
+      // Sketch-style callout boxes
+      blockquote {
+        border-left: 3px solid $highlight-blue;
+        padding: 0.5rem 0 0.5rem 1.5rem;
+        margin: 1.5rem 0;
+        position: relative;
+        
+        // Sketch-style decoration
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 3px;
+          background-color: $highlight-blue;
+          // Make it slightly wavy
+          mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 6 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3,0 C2,20 4,40 3,60 C2,80 4,100 3,100' stroke='black' fill='none'/%3E%3C/svg%3E");
+          mask-size: 100% 100%;
+        }
+        
+        p:last-child {
+          margin-bottom: 0;
+        }
+      }
+      
+      // Code highlighting is handled in syntaxhighlighting.html
+    }
+    
+    // Project navigation
+    .project-navigation {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid $border-color;
+      
+      .project-navigation-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        a {
+          text-decoration: none;
+          color: $text-color;
+          transition: all 0.2s;
+          
+          &:hover {
+            color: darken($highlight-blue, 30%);
+          }
+        }
+        
+        .prev-project, .next-project {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          max-width: 30%;
+          
+          .nav-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+        
+        .back-to-projects {
+          padding: 0.5rem 1rem;
+          border: 2px solid $text-color;
+          border-radius: 4px;
+          font-weight: 600;
+          
+          &:hover {
+            background-color: rgba($highlight-blue, 0.3);
+          }
+        }
+      }
+    }
+  }

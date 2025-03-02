@@ -1,0 +1,431 @@
+// ----------------------------------------
+// POST PAGE STYLING
+// Styles for individual post pages and category listing
+// ----------------------------------------
+
+// Posts container for listing pages
+.posts-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    
+    .page-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      
+      // Sketchy underline
+      position: relative;
+      display: inline-block;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background-color: $text-color;
+        opacity: 0.8;
+        // Wavy line effect
+        mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,4 C10,0 20,8 30,4 C40,0 50,8 60,4 C70,0 80,8 90,4 C95,2 100,4 100,4' stroke='black' fill='none'/%3E%3C/svg%3E");
+        mask-size: 100% 100%;
+      }
+    }
+  }
+  
+  // Category navigation
+  .category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    font-family: $navbar-font;
+    
+    .category-link {
+      position: relative;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      color: $text-color;
+      font-weight: 600;
+      
+      // Brush stroke background
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: transparent;
+        border-radius: 4px;
+        z-index: -1;
+        transition: background-color 0.2s;
+      }
+      
+      &:hover::before {
+        background-color: rgba($highlight-blue, 0.2);
+      }
+      
+      &.active::before {
+        background-color: rgba($highlight-blue, 0.5);
+      }
+    }
+  }
+  
+  // Post page
+  .post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+    
+    // Post header
+    .post-header {
+      margin-bottom: 2rem;
+      
+      .post-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+        
+        // Sketchy underline
+        position: relative;
+        display: inline-block;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background-color: $text-color;
+          opacity: 0.7;
+          // Wavy line effect using mask
+          mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,4 C10,0 20,8 30,4 C40,0 50,8 60,4 C70,0 80,8 90,4 C95,2 100,4 100,4' stroke='black' fill='none'/%3E%3C/svg%3E");
+          mask-size: 100% 100%;
+        }
+      }
+      
+      .post-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        font-family: $navbar-font;
+        
+        .post-date {
+          font-weight: 600;
+        }
+        
+        .post-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          
+          .post-tag {
+            padding: 0.2rem 0.6rem;
+            background-color: rgba($highlight-blue, 0.3);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            
+            &::before {
+              content: '#';
+              margin-right: 0.2rem;
+            }
+          }
+        }
+      }
+    }
+    
+    // Post featured image
+    .post-featured-image {
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+    }
+    
+    // Post content styles
+    .post-content {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      
+      // Spacing between elements
+      h2, h3, h4, h5, h6 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+      
+      h3 {
+        font-size: 1.5rem;
+      }
+      
+      h4 {
+        font-size: 1.3rem;
+      }
+      
+      p {
+        margin-bottom: 1.5rem;
+      }
+      
+      // Sketch-style blockquotes
+      blockquote {
+        margin: 1.5rem 0;
+        padding: 1rem 1.5rem;
+        border-left: 3px solid $highlight-blue;
+        background-color: rgba($highlight-blue, 0.1);
+        position: relative;
+        
+        // Sketch-style border
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 3px;
+          background-color: $highlight-blue;
+          // Make it slightly wavy
+          mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 6 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3,0 C2,20 4,40 3,60 C2,80 4,100 3,100' stroke='black' fill='none'/%3E%3C/svg%3E");
+          mask-size: 100% 100%;
+        }
+        
+        p:last-child {
+          margin-bottom: 0;
+        }
+      }
+      
+      // Lists with sketchy bullets
+      ul {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+        
+        li {
+          margin-bottom: 0.5rem;
+          position: relative;
+          
+          &::marker {
+            color: $text-color;
+          }
+        }
+      }
+      
+      ol {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+        
+        li {
+          margin-bottom: 0.5rem;
+        }
+      }
+      
+      // Images with sketch-style border
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+      }
+      
+      // Table styles
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-family: $navbar-font;
+        
+        th, td {
+          padding: 0.75rem;
+          border: 1px solid $border-color;
+        }
+        
+        th {
+          background-color: rgba($highlight-blue, 0.2);
+          text-align: left;
+        }
+        
+        tr:nth-child(even) {
+          background-color: rgba(0, 0, 0, 0.02);
+        }
+      }
+      
+      // Horizontal rule
+      hr {
+        margin: 2rem 0;
+        border: none;
+        height: 2px;
+        background-color: $border-color;
+        // Sketch style with mask
+        mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,2 C10,1 20,3 30,2 C40,1 50,3 60,2 C70,1 80,3 90,2 C95,1 100,2 100,2' stroke='black' fill='none'/%3E%3C/svg%3E");
+        mask-size: 100% 100%;
+      }
+      
+      // Code blocks are styled in syntaxhighlighting.html
+      
+      // Mathematical equations
+      .katex-display {
+        overflow-x: auto;
+        padding: 1rem 0;
+        margin: 1.5rem 0;
+      }
+    }
+    
+    // Post footer
+    .post-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid $border-color;
+      
+      .post-navigation {
+        display: flex;
+        justify-content: space-between;
+        
+        .post-nav-link {
+          max-width: 45%;
+          text-decoration: none;
+          color: $text-color;
+          
+          &:hover {
+            .post-nav-title {
+              color: darken($highlight-blue, 30%);
+            }
+          }
+          
+          .post-nav-direction {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.7;
+          }
+          
+          .post-nav-title {
+            font-weight: 600;
+            transition: color 0.2s;
+          }
+        }
+      }
+    }
+    
+    // Author bio at the end of post
+    .author-bio {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      border: 2px solid $text-color;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background-color: rgba($highlight-blue, 0.1);
+      
+      // Sketch-style border with slight rotation
+      transform: rotate(0.2deg);
+      
+      .author-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      
+      .author-info {
+        flex: 1;
+        
+        .author-name {
+          font-size: 1.2rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+        }
+        
+        .author-description {
+          margin-bottom: 0.5rem;
+          font-size: 0.95rem;
+        }
+        
+        .author-link {
+          font-weight: 600;
+          font-family: $navbar-font;
+        }
+      }
+    }
+    
+    // Table of contents
+    .toc {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      border: 2px solid $text-color;
+      border-radius: 8px;
+      background-color: rgba($highlight-purple, 0.1);
+      
+      .toc-title {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+      
+      .toc-list {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+        
+        .toc-list-item {
+          margin-bottom: 0.5rem;
+          
+          .toc-list-link {
+            text-decoration: none;
+            color: $text-color;
+            display: inline-block;
+            padding: 0.2rem 0;
+            transition: all 0.2s;
+            
+            &:hover {
+              color: darken($highlight-blue, 30%);
+              transform: translateX(3px);
+            }
+          }
+          
+          // Nested items
+          .toc-list {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+  
+  // Responsive styles
+  @media (max-width: 768px) {
+    .post {
+      padding: 1rem;
+      
+      .post-header {
+        .post-title {
+          font-size: 2rem;
+        }
+      }
+      
+      .author-bio {
+        flex-direction: column;
+        text-align: center;
+        
+        .author-image {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+    
+    .category-nav {
+      justify-content: center;
+    }
+  }

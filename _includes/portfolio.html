@@ -1,0 +1,75 @@
+<div class="portfolio-container">
+    <h1 class="page-title">Portfolio</h1>
+    <p class="page-description">An overview of projects I've worked on, organized by category.</p>
+    
+    <!-- Portfolio filters -->
+    <div class="portfolio-filters">
+      <button class="filter-button active" data-filter="all">All</button>
+      {% assign categories = site.projects | map: "category" | uniq %}
+      {% for category in categories %}
+        <button class="filter-button" data-filter="{{ category | downcase | replace: ' ', '-' }}">
+          {{ category | capitalize }}
+        </button>
+      {% endfor %}
+    </div>
+    
+    <!-- Projects grid -->
+    <div class="projects-grid">
+      {% for project in site.projects %}
+      <div class="project-card" data-category="{{ project.category | downcase | replace: ' ', '-' }}">
+        <a href="{{ project.url | relative_url }}" class="project-link">
+          {% if project.image %}
+          <div class="project-image">
+            <img src="{{ project.image | relative_url }}" alt="{{ project.title }}">
+          </div>
+          {% endif %}
+          <div class="project-info">
+            <h3>{{ project.title }}</h3>
+            {% if project.tech %}
+            <div class="project-tech">
+              {% for tech in project.tech %}
+                <span class="tech-tag">{{ tech }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% if project.type %}
+            <div class="project-type">{{ project.type }}</div>
+            {% endif %}
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <!-- Portfolio filtering script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all filter buttons
+      const filterButtons = document.querySelectorAll('.filter-button');
+      // Get all project cards
+      const projectCards = document.querySelectorAll('.project-card');
+      
+      // Add click event to filter buttons
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          // Get filter value
+          const filterValue = this.getAttribute('data-filter');
+          
+          // Show/hide projects based on filter
+          projectCards.forEach(card => {
+            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>

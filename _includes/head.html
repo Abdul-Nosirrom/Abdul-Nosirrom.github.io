@@ -23,4 +23,8 @@
     <!-- Syntax highlighting -->
     {% include syntaxhighlighting.html %}
 
+    <!-- TOC script -->
+    {% if page.toc %}
+    <script src="{{ '/assets/js/toc.js' | relative_url }}"></script>
+    {% endif %}
 </head>

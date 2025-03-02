@@ -1,0 +1,47 @@
+{% capture tocWorkspace %}
+    {% comment %}
+        Modified version for better hierarchy support and compatibility
+    {% endcomment %}
+
+    {% assign headings = include.html | split: '<h' %}
+    {% assign firstHeading = true %}
+    {% capture toc %}{% endcapture %}
+
+    {% for heading in headings %}
+        {% if heading == "" %}
+            {% continue %}
+        {% endif %}
+
+        {% assign headingLevel = heading | slice: 0, 1 | times: 1 %}
+        {% if headingLevel < 1 or headingLevel > 6 %}
+            {% continue %}
+        {% endif %}
+
+        {% if firstHeading %}
+            {% assign firstHeading = false %}
+            {% assign minHeadingLevel = headingLevel %}
+        {% endif %}
+
+        {% assign _hWorkspace = heading | split: '</h' %}
+        {% assign _hContentWorkspace = _hWorkspace[0] | split: '>' %}
+        {% assign _hContent = _hContentWorkspace[1] | strip_html | strip %}
+
+        {% assign anchor = _hContent | slugify %}
+        {% if anchor == "" %}
+            {% assign anchor = forloop.index %}
+        {% endif %}
+
+        {% capture tocItem %}
+<li class="toc-h{{ headingLevel }}">
+    <a href="#{{ anchor }}">{{ _hContent }}</a>
+</li>{% endcapture %}
+
+        {% capture toc %}{{ toc }}{{ tocItem }}{% endcapture %}
+    {% endfor %}
+
+    {% if include.class %}
+        {% capture toc %}<ul class="{{ include.class }}">{{ toc }}</ul>{% endcapture %}
+    {% else %}
+        {% capture toc %}<ul class="table-of-contents">{{ toc }}</ul>{% endcapture %}
+    {% endif %}
+{% endcapture %}{{ toc | strip }}

@@ -47,7 +47,7 @@
     }
     
     // Projects links - Light purple
-    &[href*="/portfolio"] {
+    &[href*="/projects"] {
       &::before {
         background-color: rgba(235, 204, 255, 0.8);
       }
