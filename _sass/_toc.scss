@@ -308,12 +308,12 @@
   
   // Important: Main content should not be affected by TOC
   // We'll use a max-width for the content itself
-  .post-content {
+  .toc-post-content {
     max-width: 750px; // Set maximum width for content
     margin: 0 auto; // Center the content
   }
   
-  .post-header, .post-footer, .post-featured-image {
+  .toc-post-header, .toc-post-footer, .toc-post-featured-image {
     max-width: 750px; // Match content width
     margin-left: auto;
     margin-right: auto;
@@ -343,7 +343,7 @@
   
   // For smaller screens, make the TOC float at the bottom
   @media (max-width: 768px) {
-    .post-content, .post-header, .post-footer, .post-featured-image {
+    .toc-post-content, .toc-post-header, .toc-post-footer, .toc-post-featured-image {
       max-width: 100%; // Full width on small screens
     }
     
