@@ -2,13 +2,13 @@
 layout: project
 title: "Shell Mesh Generation"
 category: graphics
-image: assets/images/portfolio/shell-mesh/shell_ex_4.png.png
+image: assets/images/portfolio/shell-mesh/shell_ex_4.png
 gallery:
-  - assets/images/portfolio/shell-mesh/shell_ex_4.png.png
-  - assets/images/portfolio/shell-mesh/shell_ex_1.png.png
-  - assets/images/portfolio/shell-mesh/shell_ex_2.png.png
-  - assets/images/portfolio/shell-mesh/shell_ex_3.png.png
-  - assets/images/portfolio/shell-mesh/shell_ex_5.png.png
+  - assets/images/portfolio/shell-mesh/shell_ex_4.png
+  - assets/images/portfolio/shell-mesh/shell_ex_1.png
+  - assets/images/portfolio/shell-mesh/shell_ex_2.png
+  - assets/images/portfolio/shell-mesh/shell_ex_3.png
+  - assets/images/portfolio/shell-mesh/shell_ex_5.png
 tech: [Unity, HLSL, C#]
 type: Tool
 github: https://github.com/Abdul-Nosirrom/ShellTexturing
