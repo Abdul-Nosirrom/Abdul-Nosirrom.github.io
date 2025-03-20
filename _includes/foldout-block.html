@@ -1,0 +1,20 @@
+{% comment %}
+Include file for foldout with markdown content support
+Usage: 
+{% capture foldout_content %}
+Markdown content here...
+{% endcapture %}
+{% include foldout-block.html title="Click to expand" content=foldout_content open=true %}
+{% endcomment %}
+
+<div class="foldout {% if include.style == 'unity' %}unity-foldout{% endif %} {% if include.open %}open{% endif %}">
+  <div class="foldout-header">
+    <span class="foldout-title">{{ include.title }}</span>
+    <span class="foldout-icon">{% if include.open %}−{% else %}+{% endif %}</span>
+  </div>
+  <div class="foldout-content">
+    <div class="foldout-content-inner">
+      {{ include.content | markdownify }}
+    </div>
+  </div>
+</div>

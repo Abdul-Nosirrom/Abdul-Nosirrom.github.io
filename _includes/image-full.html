@@ -1,0 +1,10 @@
+{% comment %}
+Include file for full-width centered image with optional scaling
+Usage: {% include image-full.html src="/path/to/image.jpg" alt="Description" caption="Optional caption" scale="0.8" %}
+{% endcomment %}
+<figure class="image-full" {% if include.scale %}style="width: {{ include.scale | times: 100 }}%; margin-left: auto; margin-right: auto;"{% endif %}>
+  <img src="{{ include.src | relative_url }}" alt="{{ include.alt }}">
+  {% if include.caption %}
+  <figcaption>{{ include.caption }}</figcaption>
+  {% endif %}
+</figure>

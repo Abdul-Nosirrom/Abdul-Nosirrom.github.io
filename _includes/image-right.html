@@ -1,0 +1,10 @@
+{% comment %}
+Include file for right-aligned image with optional scaling
+Usage: {% include image-right.html src="/path/to/image.jpg" alt="Description" caption="Optional caption" scale="0.8" %}
+{% endcomment %}
+<figure class="image-right" {% if include.scale %}style="width: calc(48% * {{ include.scale }});"{% endif %}>
+  <img src="{{ include.src | relative_url }}" alt="{{ include.alt }}">
+  {% if include.caption %}
+  <figcaption>{{ include.caption }}</figcaption>
+  {% endif %}
+</figure>
