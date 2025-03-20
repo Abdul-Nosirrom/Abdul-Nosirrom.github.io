@@ -3,6 +3,16 @@ layout: default
 ---
 
 <article class="post">
+
+  {% if page.toc %}
+  <div class="toc-sidebar">
+    <h2 class="toc-title">Contents</h2>
+    {% include toc.html html=content %}
+    <button class="toc-close" aria-label="Close Table of Contents">×</button>
+  </div>
+  <button class="toc-fixed-toggle" aria-label="Show Table of Contents">→</button>
+  {% endif %}
+
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
     
@@ -43,12 +53,39 @@ layout: default
   <footer class="post-footer">
     <div class="post-navigation">
       {% if page.previous %}
-      <a href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>
+      <a href="{{ page.previous.url | relative_url }}" class="post-nav-link post-nav-prev">
+        <span class="post-nav-direction">Previous Post</span>
+        <span class="post-nav-title">{{ page.previous.title }}</span>
+      </a>
+      {% else %}
+      <div></div>
       {% endif %}
       
       {% if page.next %}
-      <a href="{{ page.next.url | relative_url }}">{{ page.next.title }} →</a>
+      <a href="{{ page.next.url | relative_url }}" class="post-nav-link post-nav-next">
+        <span class="post-nav-direction">Next Post</span>
+        <span class="post-nav-title">{{ page.next.title }}</span>
+      </a>
+      {% else %}
+      <div></div>
       {% endif %}
     </div>
   </footer>
+
+{% if page.math %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true, mode: "display"},
+        {left: "$", right: "$", display: false, mode: "inline"}
+      ],
+      throwOnError: false,
+      displayMode: true,
+      output: "html"
+    });
+  });
+</script>
+{% endif %}
+
 </article>
