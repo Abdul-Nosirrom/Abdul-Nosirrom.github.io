@@ -1,3 +1,4 @@
+<!-- _layouts/post.html with enhanced features -->
 ---
 layout: default
 ---
@@ -7,7 +8,9 @@ layout: default
   <div class="toc-sidebar">
     <h2 class="toc-title">Contents</h2>
     {% include toc.html html=content %}
+    <button class="toc-close" aria-label="Close Table of Contents">×</button>
   </div>
+  <button class="toc-fixed-toggle" aria-label="Show Table of Contents">→</button>
   {% endif %}
 
   <header class="post-header">
