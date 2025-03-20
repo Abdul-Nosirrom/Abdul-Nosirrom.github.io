@@ -38,6 +38,12 @@ layout: default
     </div>
   </header>
 
+  <div class="project-content">
+    <div class="profile-card">
+    {{ content }}
+    </div>
+  </div>
+
   {% if page.gallery %}
   <div class="project-gallery">
     <div class="gallery-slider">
@@ -68,10 +74,6 @@ layout: default
     <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
   </div>
   {% endif %}
-
-  <div class="project-content">
-    {{ content }}
-  </div>
   
   <div class="project-navigation">
     <div class="project-navigation-inner">
