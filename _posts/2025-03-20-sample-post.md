@@ -44,13 +44,23 @@ When you have enough text, it will continue to wrap around the image until it ex
 
 ### Right-Aligned Images
 
-{% include image-right.html src="/assets/images/avatar.png" alt="Right-aligned image" caption="This image is aligned to the right with text wrapping around it" scale="0.5" %}
+{% include image-right.html src="/assets/images/testing_gif.gif" alt="Right-aligned image" caption="This image is aligned to the right with text wrapping around it" scale="0.5" %}
 
 Similar to the left-aligned image, this one is aligned to the right with text wrapping around it. We've scaled this one to 50% of its default size to demonstrate the scaling functionality.
 
 The clearfix element is important to use after floating elements to ensure proper layout of subsequent content. Without it, elements that follow might unintentionally wrap around the image.
 
 {% include clearfix.html %}
+
+## Slideshows / Galleries
+
+Can add gallery images with the following inline-gallery.html include
+
+{% include inline-gallery.html 
+  images="shell_ex_4.png,shell_ex_1.png,shell_ex_2.png,shell_ex_3.png" 
+  captions="First caption,Second caption,Third caption,Fourth caption" 
+  base_path="/assets/images/portfolio/shell-mesh/" 
+%}
 
 ## Foldout Sections
 

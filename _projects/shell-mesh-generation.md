@@ -4,11 +4,16 @@ title: "Shell Mesh Generation"
 category: graphics
 image: assets/images/portfolio/shell-mesh/shell_ex_4.png
 gallery:
-  - assets/images/portfolio/shell-mesh/shell_ex_4.png
-  - assets/images/portfolio/shell-mesh/shell_ex_1.png
-  - assets/images/portfolio/shell-mesh/shell_ex_2.png
-  - assets/images/portfolio/shell-mesh/shell_ex_3.png
-  - assets/images/portfolio/shell-mesh/shell_ex_5.png
+  - path: assets/images/portfolio/shell-mesh/shell_ex_4.png
+    caption: Procedural strands
+  - path: assets/images/portfolio/shell-mesh/shell_ex_1.png
+    caption: Procedural strands
+  - path: assets/images/portfolio/shell-mesh/shell_ex_2.png
+    caption: Individual strand texture
+  - path: assets/images/portfolio/shell-mesh/shell_ex_3.png
+    caption: Full shape texture
+  - path: assets/images/portfolio/shell-mesh/shell_ex_5.png
+    caption: Debug view
 tech: [Unity, HLSL, C#]
 type: Tool
 github: https://github.com/Abdul-Nosirrom/ShellTexturing

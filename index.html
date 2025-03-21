@@ -17,7 +17,7 @@ math: true
           <li>🔎 Shader development </li>
           <li>🔎 Geometry processing </li>
         </ul>  
-        <p>My background combines strong mathematical foundations with practical experience in DX11 and OpenGL.</p>
+        <p>My background combines strong mathematical foundations with practical experience in computer graphics.</p>
       </div>
     </div>
     
@@ -106,6 +106,7 @@ math: true
     
     <div class="projects-grid">
       {% for project in site.projects limit:6 %}
+      <a href="{{ project.url | relative_url }}" class="project-link">
       <div class="project-card">
         {% if project.image %}
         <div class="project-image">
@@ -117,6 +118,7 @@ math: true
           <p>{{ project.description }}</p>
         </div>
       </div>
+      </a>
       {% endfor %}
     </div>
     

@@ -29,4 +29,9 @@
     {% if page.toc %}
     <script src="{{ '/assets/js/toc.js' | relative_url }}"></script>
     {% endif %}
+
+    <!-- Gallery script for project pages -->
+    {% if page.layout == 'project' and page.gallery %}
+    <script src="{{ '/assets/js/gallery.js' | relative_url }}"></script>
+    {% endif %}
 </head>

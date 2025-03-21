@@ -1,0 +1,102 @@
+<!-- Enhanced Gallery Component -->
+<div class="project-gallery enhanced">
+    <div class="gallery-container">
+      <div class="gallery-slider">
+        {% for item in page.gallery %}
+        <div class="gallery-slide">
+          <div class="image-container">
+            {% if item.type == 'video' %}
+              {% if item.provider == 'youtube' %}
+                <div class="video-wrapper">
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ item.id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+              {% elsif item.provider == 'vimeo' %}
+                <div class="video-wrapper">
+                  <iframe src="https://player.vimeo.com/video/{{ item.id }}" width="560" height="315" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                </div>
+              {% elsif item.provider == 'local' %}
+                <div class="video-wrapper">
+                  <video controls>
+                    <source src="{{ item.path | relative_url }}" type="{{ item.mime_type | default: 'video/mp4' }}">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              {% elsif item.provider == 'gif' %}
+                <img src="{{ item.path | relative_url }}" alt="{{ item.caption | default: 'Animated GIF' }}">
+              {% endif %}
+            {% else %}
+              {% if item.path %}
+                <img src="{{ item.path | relative_url }}" alt="{{ item.caption | default: 'Gallery image' }}">
+              {% else %}
+                <img src="{{ item | relative_url }}" alt="Gallery image">
+              {% endif %}
+            {% endif %}
+          </div>
+          {% if item.caption %}
+          <div class="gallery-caption">
+            <p>{{ item.caption }}</p>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      
+      {% if page.gallery.size > 1 %}
+      <div class="gallery-controls">
+        <div class="gallery-nav">
+          <button class="prev-slide" aria-label="Previous item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <div class="slide-counter">
+            <span class="current-slide">1</span> / <span class="total-slides">{{ page.gallery.size }}</span>
+          </div>
+          <button class="next-slide" aria-label="Next item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </div>
+      
+      <div class="gallery-actions">
+        <button class="fullscreen-toggle" aria-label="Toggle fullscreen">
+          <!-- Icon for entering fullscreen mode -->
+          <div class="fs-icon enter-fullscreen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+            </svg>
+          </div>
+          
+          <!-- Icon for exiting fullscreen mode -->
+          <div class="fs-icon exit-fullscreen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path>
+            </svg>
+          </div>
+        </button>
+      </div>
+      
+      <div class="gallery-thumbnails-container">
+        <div class="gallery-thumbnails">
+          {% for item in page.gallery %}
+          <div class="gallery-thumbnail {% if forloop.first %}active{% endif %}">
+            {% if item.type == 'video' %}
+              {% if item.thumbnail %}
+                <img src="{{ item.thumbnail | relative_url }}" alt="Video thumbnail">
+              {% else %}
+                <div class="video-thumbnail">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                </div>
+              {% endif %}
+            {% else %}
+              {% if item.path %}
+                <img src="{{ item.path | relative_url }}" alt="Thumbnail">
+              {% else %}
+                <img src="{{ item | relative_url }}" alt="Thumbnail">
+              {% endif %}
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>

@@ -1,0 +1,345 @@
+// ----------------------------------------
+// ENHANCED GALLERY STYLING
+// Styles for the enhanced image gallery with fixed dimensions
+// ----------------------------------------
+
+// Gallery container
+.project-gallery.enhanced {
+    margin-bottom: 2rem;
+    
+    .gallery-container {
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: relative;
+      border: 2px solid $text-color;
+      transition: all 0.3s ease;
+      
+      &.fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9999;
+        border-radius: 0;
+        border: none;
+        margin: 0;
+        
+        .image-container {
+          height: calc(100vh - 140px); // Adjusted to leave room for controls and thumbnails
+        }
+        
+        .gallery-slider {
+          border-radius: 0;
+        }
+        
+        .fullscreen-toggle {
+          .enter-fullscreen {
+            display: none;
+          }
+          
+          .exit-fullscreen {
+            display: block;
+          }
+        }
+      }
+    }
+  
+    // Slider main area
+    .gallery-slider {
+      position: relative;
+      width: 100%;
+      border-radius: 8px 8px 0 0;
+      overflow: hidden;
+    }
+  
+    // Individual slides
+    .gallery-slide {
+      display: none;
+      
+      &:first-child {
+        display: block;
+      }
+    }
+  
+    // Fixed size image container
+    .image-container {
+      height: 450px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+      transition: height 0.3s ease;
+      
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+    }
+  
+    // Caption styling
+    .gallery-caption {
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 0.8rem 1rem;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      font-family: $navbar-font;
+      z-index: 5;
+      
+      p {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+    }
+  
+    // Navigation controls
+    .gallery-controls {
+      padding: 0.8rem;
+      background-color: #111;
+      border-top: 1px solid #333;
+      position: relative;
+    }
+  
+    .gallery-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 220px;
+      margin: 0 auto;
+    }
+  
+    .slide-counter {
+      color: white;
+      font-family: $navbar-font;
+      font-size: 0.9rem;
+    }
+  
+    // Bold arrow navigation buttons
+    .prev-slide, .next-slide {
+      background: #333;
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      
+      &:hover {
+        background: #555;
+        transform: translateY(-2px);
+      }
+      
+      svg {
+        width: 24px;
+        height: 24px;
+        stroke: white;
+        stroke-width: 2.5;
+      }
+    }
+    
+    // Fullscreen toggle button
+    .gallery-actions {
+      position: absolute;
+      top: 0.8rem;
+      right: 0.8rem;
+      z-index: 10;
+      
+      .fullscreen-toggle {
+        background: rgba(51, 51, 51, 0.7);
+        color: white;
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        &:hover {
+          background: #555;
+        }
+        
+        .fs-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+        }
+        
+        .exit-fullscreen {
+          display: none;
+        }
+      }
+    }
+  
+    // Thumbnails area
+    .gallery-thumbnails-container {
+      padding: 0.8rem;
+      background-color: #111;
+      border-top: 1px solid #333;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #555 #111;
+      
+      &::-webkit-scrollbar {
+        height: 6px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: #111;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: #555;
+        border-radius: 3px;
+      }
+    }
+  
+    .gallery-thumbnails {
+      display: flex;
+      gap: 0.5rem;
+      padding-bottom: 0.2rem;
+    }
+  
+    .gallery-thumbnail {
+      width: 60px;
+      height: 60px;
+      border-radius: 4px;
+      overflow: hidden;
+      opacity: 0.6;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid transparent;
+      flex-shrink: 0;
+      
+      &:hover {
+        opacity: 0.8;
+      }
+      
+      &.active {
+        opacity: 1;
+        border-color: #fff;
+      }
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  
+  // Body class when gallery is fullscreen
+  body.gallery-fullscreen-active {
+    overflow: hidden;
+  }
+  
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .project-gallery.enhanced {
+      .image-container {
+        height: 350px;
+      }
+      
+      .gallery-thumbnails {
+        justify-content: flex-start;
+      }
+      
+      .gallery-container.fullscreen {
+        .image-container {
+          height: calc(100vh - 120px);
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .project-gallery.enhanced {
+      .image-container {
+        height: 250px;
+      }
+      
+      .gallery-container.fullscreen {
+        .image-container {
+          height: calc(100vh - 120px);
+        }
+      }
+    }
+
+      // Video-specific styling
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    
+    iframe, video {
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      background-color: #000;
+    }
+    
+    video {
+      display: block;
+    }
+  }
+  
+  // Video thumbnails
+  .video-thumbnail {
+    width: 100%;
+    height: 100%;
+    background-color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke: white;
+    }
+  }
+  
+  // Make sure videos in fullscreen mode are properly handled
+  .gallery-container.fullscreen {
+    .video-wrapper {
+      iframe, video {
+        max-height: calc(100vh - 140px);
+      }
+    }
+  }
+  
+  // Responsive adjustments for videos
+  @media (max-width: 768px) {
+    .video-wrapper {
+      iframe, video {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  }
