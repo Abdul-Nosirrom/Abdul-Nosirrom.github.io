@@ -8,6 +8,10 @@ description: >-                      # The >- symbol allows for multiline text
 baseurl: ""                         # Used when your site lives in a subdirectory. Empty for username.github.io sites
 url: "https://abdul-nosirrom.github.io"  # Your site's full URL
 
+github_username: abdul-nosirrom
+linkedin_username: abdulrahmen-al-modaimegh-758bbb22b
+twitter_username: FlexMentall0
+
 # Build settings
 markdown: kramdown                  # Specifies the Markdown processor
 kramdown:                          # Kramdown-specific settings
